@@ -3,7 +3,7 @@ import React from "react";
 const Header = () => {
   return (
     <div>
-      <input type="checkbox" defaultChecked className="checkbox" />
+      {/* <input type="checkbox" defaultChecked className="checkbox" /> */}
     </div>
   );
 };
