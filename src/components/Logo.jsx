@@ -1,7 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Logo = () => {
-  return <div>Logo Here</div>;
+  return (
+    <div>
+      <Link to={"/"}>Logo Here</Link>
+    </div>
+  );
 };
 
 export default Logo;
