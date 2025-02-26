@@ -1,19 +1,22 @@
-import { Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
-// import Header from "./components/Header";
+import CardDetails from "./components/CardDetails";
+import CardList from "./components/CardList";
 
 const App = () => {
   return (
-    <>
-      {/* <Header /> */}
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          {/* <Route index element={<h2>HOME</h2>} /> */}
+    <Routes>
+      {/* MainLayout applies only to the homepage */}
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<CardList />} />
+      </Route>
 
-          <Route path="*" element={<h2>Not Found</h2>} />
-        </Route>
-      </Routes>
-    </>
+      {/* CardDetails should be a standalone page */}
+      <Route path="/carddetails/:id" element={<CardDetails />} />
+
+      {/* 404 Not Found Page */}
+      <Route path="*" element={<h2>Not Found</h2>} />
+    </Routes>
   );
 };
 
