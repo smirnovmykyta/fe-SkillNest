@@ -9,8 +9,8 @@ const Card = ({ card }) => {
 
   return (
     <article
-      onClick={() => handleClick(card.id)}
-      key={card.id}
+      onClick={() => handleClick(card._id)}
+      key={card._id}
       className="relative rounded-xl border-2 border-gray-100 bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-4"
     >
       {/* Heart Icon */}
@@ -22,8 +22,7 @@ const Card = ({ card }) => {
         <div className="w-full flex justify-center sm:w-auto">
           <a href="#" className="block">
             <img
-              alt={card.name}
-              src={card.img}
+              src={card.media && card.media.length ? card.media[0] : "#"}
               className="w-20 h-20 rounded-full object-cover"
             />
           </a>
@@ -32,27 +31,56 @@ const Card = ({ card }) => {
         <div className="flex-1">
           {/* Title and Verified Badge */}
           <div className="flex justify-between items-center">
-            <h3 className="font-medium sm:text-lg">{card.name}</h3>
+            <h3 className="font-medium sm:text-lg">{card.title}</h3>
           </div>
 
           {/* Biete and Suche */}
-          <p className="mt-2">Biete: {card.biete}</p>
-          <p className="mt-2">Suche: {card.suche}</p>
+          <p className="mt-2">Offering: {card.offer}</p>
+          <p className="mt-2">Looking for: {card.request}</p>
 
           {/* Accordion for Text */}
+          {/* freier Text fehlt im AdvertisementModel.js */}
           <div className="mt-3 text-sm text-gray-700">
             {/* TODO: Use CSS to style ellipsis of long text */}
-            <p className="line-clamp-2">{card.text.substring(0, 100)}...</p>
+            <p className="line-clamp-2">
+              {card.description.substring(0, 100)}...
+            </p>
           </div>
 
           {/* Languages and Availability */}
           <div className="mt-2 flex flex-wrap items-center gap-2">
-            <p className="text-xs text-gray-500">{card.languages}</p>
+            <p className="text-xs text-gray-500">
+              {card.languages
+                .map((lang) => `${lang.language} (${lang.qualification})`)
+                .join(", ")}
+            </p>
+
+            <span className="hidden sm:block" aria-hidden="true">
+              &middot;
+            </span>
+
+            {/* 
             <span className="hidden sm:block" aria-hidden="true">
               &middot;
             </span>
             <p className="text-xs text-gray-500">
-              <span className="font-medium">{card.availability}</span>
+              <span className="font-medium">
+                {card.timeAvailability.map((t) => t.toString()).join(", ")}
+              </span>
+            </p> */}
+
+            {/* Online / in-person */}
+            <p className="mt-2">
+              Online:{" "}
+              {card.lessonMode === "online" || card.lessonMode === "both"
+                ? "yes"
+                : "no"}
+            </p>
+            <p className="mt-2">
+              in-person:{" "}
+              {card.lessonMode === "in-person" || card.lessonMode === "both"
+                ? "yes"
+                : "no"}
             </p>
           </div>
 
@@ -61,28 +89,28 @@ const Card = ({ card }) => {
             {/* TODO: do this in a loop; display current rating? */}
             <input
               type="radio"
-              name={`rating-${card.id}`}
+              name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
             />
             <input
               type="radio"
-              name={`rating-${card.id}`}
+              name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
               defaultChecked
             />
             <input
               type="radio"
-              name={`rating-${card.id}`}
+              name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
             />
             <input
               type="radio"
-              name={`rating-${card.id}`}
+              name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
             />
             <input
               type="radio"
-              name={`rating-${card.id}`}
+              name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
             />
           </div>
