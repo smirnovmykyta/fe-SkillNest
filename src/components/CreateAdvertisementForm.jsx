@@ -1,103 +1,58 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const MakenavForm = () => {
-  // const [counter, setCounter] = useState(0);
-  const [formData, setFormData] = useState({
-    // fName: " ",
-    // lName: " ",
-    mediaPic: "",
-    mediaVid: "",
-    title: "",
-    description: "",
-    myoffer: "",
-    looking_for: "",
-    request: "",
-    category: "proglangs",
-    subcategory: "JavaScript",
-    isGroup: false,
-    // creationDate: "",
-    timeAvailability: [{ date: "", time: "" }],
-    expiration: "1 Month",
-    onlineteaching: false,
-    location: "",
-    aktive: true,
-    languages: "",
-  });
+import { defaultAdvertisemnt } from "../constant/defaultAdvertisemnt";
+import { languages } from "../constant/languages.js";
+import { lessons } from "../constant/lessons.js";
+import { qualifications } from "../constant/qualifications.js";
+import { music } from "../constant/music.js";
+import { progLangs } from "../constant/progLangs.js";
 
-  // useEffect(() => {
-  //   setCounter(counter + 1);
-  //   if (counter === 1) console.log("Noa", formData.languages);
-  //   else console.log("Noa", formData.languages);
-  // }, []);
+const CreateAdvertisementForm = () => {
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [progLangs, setprogLangs] = useState("");
+  const [langs, setLangs] = useState("");
+  const [qualis, setQualis] = useState("");
+  const [formData, setFormData] = useState(defaultAdvertisemnt);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    // console.log("Noa", name, value, type, checked);
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
   };
 
-  const handleTimeAvailabilityChange = (index, e) => {
+  const handleTimeAvailabilityChange = (e) => {
     const { name, value } = e.target;
-    const newTimeAvailability = formData.timeAvailability.map((item, i) => {
-      if (i === index) {
-        return { ...item, [name]: value };
-      }
-      return item;
-    });
-    setFormData({ ...formData, timeAvailability: newTimeAvailability });
+    name === "date" ? setDate(value) : setTime(value);
   };
 
   const addTimeAvailability = () => {
+    if (!date || !time) return;
     setFormData({
       ...formData,
-      timeAvailability: [...formData.timeAvailability, { date: "" }],
+      timeAvailability: [...formData.timeAvailability, { date, time }],
     });
+    setDate("");
+    setTime("");
   };
 
-  const removeTimeAvailability = (indexToRemove) => {
+  const removeTimeAvailability = (key) => {
     setFormData({
       ...formData,
       timeAvailability: formData.timeAvailability.filter(
-        (_, index) => index !== indexToRemove
+        (_, index) => index !== key
       ),
     });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("NOA", formData);
   };
-
   return (
     <form onSubmit={handleSubmit} className="p-4 space-y-4 ">
       <div className="min-w-[490px] justify-content-center items-center">
-        {/* <div className="form-control flex mb-2">
-          <label className="label">
-            <span className="mr-1 label-text">First Name:</span>
-          </label>
-          <input
-            type="text"
-            name="fName"
-            value={formData.mediaPic}
-            onChange={handleChange}
-            className="input input-bordered ml-auto "
-          />
-        </div>
-        <div className="form-control flex mb-2">
-          <label className="label">
-            <span className="mr-1 label-text">Last Name:</span>
-          </label>
-          <input
-            type="text"
-            name="lName"
-            value={formData.mediaPic}
-            onChange={handleChange}
-            className="input input-bordered ml-auto "
-          />
-        </div> */}
         <div className="form-control flex mb-2">
           <label className="label">
             <span className="mr-1 label-text">Media Picture URL: </span>
@@ -171,115 +126,34 @@ const MakenavForm = () => {
             onChange={handleChange}
             className="select select-bordered ml-auto "
           >
-            <option value="proglangs">Programming languages</option>
-            <option value="langs">Languages</option>
-            <option value="musicinsts">Music instruments</option>
-            <option value="sports">Sports</option>
+            {lessons.map((lesson, id) => (
+              <option key={id} value={lesson}>
+                {lesson}
+              </option>
+            ))}
           </select>
         </div>
-        {formData.category === "proglangs" && (
-          <div className="form-control flex mb-2">
-            <label className="label">
-              <span className="mr-1 label-text">Subcategory: </span>
-            </label>
-            <select
-              required
-              name="subcategory"
-              value={formData.subcategory}
-              onChange={handleChange}
-              className="select select-bordered ml-auto "
-            >
-              <option value="JavaScript">JavaScript</option>
-              <option value="Python">Python</option>
-              <option value="Go">Go</option>
-            </select>
-          </div>
-        )}
-        {formData.category === "langs" && (
-          <div className="form-control flex mb-2">
-            <label className="label">
-              <span className="mr-1 label-text">Subcategory: </span>
-            </label>
-            <select
-              required
-              name="subcategory"
-              value={formData.subcategory}
-              onChange={handleChange}
-              className="select select-bordered ml-auto "
-            >
-              <option value="english">English</option>
-              <option value="german">German</option>
-              <option value="turkish">Turkish</option>
-            </select>
-          </div>
-        )}
-        {formData.category === "musicinsts" && (
-          <div className="form-control flex mb-2">
-            <label className="label">
-              <span className="mr-1 label-text">Subcategory: </span>
-            </label>
-            <select
-              required
-              name="subcategory"
-              value={formData.subcategory}
-              onChange={handleChange}
-              className="select select-bordered ml-auto "
-            >
-              <option value="Guitar">Guitar</option>
-              <option value="Piano">Piano</option>
-              <option value="Couple dance">Couple dance</option>
-            </select>
-          </div>
-        )}
-        {formData.category === "sports" && (
-          <div className="form-control flex mb-2">
-            <label className="label">
-              <span className="mr-1 label-text">Subcategory: </span>
-            </label>
-            <select
-              required
-              name="subcategory"
-              value={formData.subcategory}
-              onChange={handleChange}
-              className="select select-bordered ml-auto "
-            >
-              <option value="Fitness">Fitness & Nutrition</option>
-              <option value="Swimming">Swimming</option>
-              <option value="Hike">Hike</option>
-            </select>
-          </div>
-        )}
+
         <div className="form-control flex mb-2">
           <label className="label">
             <span className="mr-1 label-text">Time Availability: </span>
           </label>
-          {formData.timeAvailability.map((item, index) => (
-            <div key={index} className="flex space-x-2 mb-2">
-              <input
-                required
-                type="date"
-                name="date"
-                value={item.date}
-                onChange={(e) => handleTimeAvailabilityChange(index, e)}
-                className="input input-bordered"
-              />
-              <input
-                required
-                type="time"
-                name="time"
-                value={item.time}
-                onChange={(e) => handleTimeAvailabilityChange(index, e)}
-                className="input input-bordered"
-              />
-              <button
-                type="button"
-                onClick={() => removeTimeAvailability(index)}
-                className="btn btn-error"
-              >
-                Remove
-              </button>
-            </div>
-          ))}
+          <div className="flex space-x-2 mb-2">
+            <input
+              type="date"
+              name="date"
+              value={date}
+              onChange={(e) => handleTimeAvailabilityChange(e)}
+              className="input input-bordered"
+            />
+            <input
+              type="time"
+              name="time"
+              value={time}
+              onChange={(e) => handleTimeAvailabilityChange(e)}
+              className="input input-bordered"
+            />
+          </div>
           <button
             type="button"
             onClick={addTimeAvailability}
@@ -303,6 +177,12 @@ const MakenavForm = () => {
                   <tr key={index}>
                     <td>{item.date}</td>
                     <td>{item.time}</td>
+                    <td
+                      onClick={() => removeTimeAvailability(index)}
+                      className="btn btn-error"
+                    >
+                      x
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -357,22 +237,22 @@ const MakenavForm = () => {
             />
           </label>
         </div>
+
         <div className="form-control flex mb-2">
           <label className="label">
             <span className="mr-1 label-text">Languages:</span>
           </label>
           <select
             required
-            name="subcategory"
-            value={formData.subcategory}
+            name="languages"
             onChange={handleChange}
             className="select select-bordered ml-auto "
           >
-            <option value="english">English</option>
-            <option value="german">German</option>
-            <option value="russian">Russian</option>
-            <option value="turkish">Turkish</option>
-            <option value="arabic">Arabic</option>
+            {languages.map((lang, id) => (
+              <option key={id} value={lang}>
+                {lang}
+              </option>
+            ))}
           </select>
         </div>
         <div className="form-control flex mb-2">
@@ -381,35 +261,16 @@ const MakenavForm = () => {
           </label>
           <select
             required
-            name="subcategory"
-            value={formData.languages}
+            name="qualifications"
             onChange={handleChange}
             className="select select-bordered ml-auto "
           >
-            <option value="native">Native</option>
-            <option value="certified">Certified</option>
-            <option value="fluent">Fluent</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="beginner">Beginner</option>
+            {qualifications.map((q, id) => (
+              <option key={id} value={q}>
+                {q}
+              </option>
+            ))}
           </select>
-
-          {/* <input
-            type="text"
-            name="quali"
-            value={formData.languages.quali}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                languages: [
-                  {
-                    ...formData.languages,
-                    quali: e.target.value,
-                  },
-                ],
-              })
-            }
-            className="input input-bordered ml-auto "
-          /> */}
         </div>
         <div className="flex mb-2 ml-auto">
           <button
@@ -440,5 +301,4 @@ const MakenavForm = () => {
     </form>
   );
 };
-
-export default MakenavForm;
+export default CreateAdvertisementForm;
