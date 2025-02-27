@@ -21,6 +21,8 @@ const CardDetails = () => {
     <div className="grid gap-4 p-4 ml-10 mr-10">
       {/* <Header /> */}
 
+      {/* Name */}
+
       <div className="relative rounded-xl border-2 border-gray-100 bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-4">
         <h1 className="text-2xl font-bold">{card.name}</h1>
         <img
@@ -28,6 +30,9 @@ const CardDetails = () => {
           alt={card.name}
           className="w-32 h-32 rounded-full"
         />
+
+        {/* Biete/ Suche*/}
+
         <p className="mt-4">{card.text}</p>
         <p className="mt-2">
           <strong>Biete:</strong> {card.biete}
@@ -35,6 +40,22 @@ const CardDetails = () => {
         <p className="mt-2">
           <strong>Suche:</strong> {card.suche}
         </p>
+
+        {/* Sprachen */}
+
+        {/* Standort */}
+
+        {/* Online / vor Ort */}
+
+        {/* Favoriten hinzufuegen mit Herz clickon */}
+
+        {/* Qualifikationen */}
+
+        {/* Verfuegbarkeiten */}
+
+        {/* Bewertungen */}
+
+        {/* Bewertung und Kommentar abgeben */}
 
         {/* Back to Home Button */}
         <button

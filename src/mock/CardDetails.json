@@ -2,7 +2,7 @@
   "cards": [
     {
       "id": 1,
-      "name": "Username",
+      "name": "Username1",
       "verifiedUser": "User is verified",
       "rating": "Rating sign",
       "biete": "Grafikdesign",
@@ -15,7 +15,7 @@
     },
     {
       "id": 2,
-      "name": "Username",
+      "name": "Username2",
       "verifiedUser": "User is verified",
       "rating": "Rating sign",
       "biete": "Portugiesisch",
