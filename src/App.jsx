@@ -12,7 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Bottomnav />} />
-          <Route path="makeNF" element={<MakenavForm />} />
+          <Route path="makenf" element={<MakenavForm />} />
 
           <Route path="*" element={<h2>Not Found</h2>} />
         </Route>

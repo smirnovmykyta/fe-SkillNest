@@ -1,23 +1,33 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Bottomnav = () => {
   const navigate = useNavigate();
-  const authenticated = true;
+  const [authenticated, setAuthenticated] = useState(false);
 
   const handlePress = (e) => {
+    const key = e.currentTarget;
     console.log(e.currentTarget);
     if (!authenticated) {
       console.log("Not Authenticated");
-      navigate("*");
+      navigate("/");
     }
-    navigate("makeNF");
+    switch (key) {
+      case "":
+        break;
+
+      default:
+        break;
+    }
+
+    navigate("makenf");
   };
 
   return (
     <div>
       <div className="btm-nav p-2 flex justify-between items-center fixed bottom-0 w-full shadow-md">
         <button
-          className="flex flex-col items-center justify-center rounded-full bg-gray-800 px-4 py-2 hover:bg-gray-600"
+          className="flex flex-col items-center justify-center rounded-full bg-gray-400 px-4 py-2 hover:bg-gray-600"
           onClick={handlePress}
         >
           <svg
@@ -37,7 +47,7 @@ const Bottomnav = () => {
           <span className="btm-nav-label">Suche</span>
         </button>
         <button
-          className="flex flex-col items-center justify-center rounded-full bg-gray-800 px-4 py-2 hover:bg-gray-600"
+          className="flex flex-col items-center justify-center rounded-full bg-gray-400 px-4 py-2 hover:bg-gray-600"
           onClick={handlePress}
         >
           <svg
@@ -57,7 +67,7 @@ const Bottomnav = () => {
           <span className="btm-nav-label">Anzeige</span>
         </button>
         <button
-          className="flex flex-col items-center justify-center rounded-full bg-gray-800 px-4 py-2 hover:bg-gray-600"
+          className="flex flex-col items-center justify-center rounded-full bg-gray-400 px-4 py-2 hover:bg-gray-600"
           onClick={handlePress}
         >
           <svg
