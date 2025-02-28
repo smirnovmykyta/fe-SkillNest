@@ -9,13 +9,10 @@ const App = () => {
       {/* MainLayout applies only to the homepage */}
       <Route path="/" element={<MainLayout />}>
         <Route index element={<CardList />} />
+        <Route path="/carddetails/:id" element={<CardDetails />} />
+        <Route path="*" element={<h2>Not Found</h2>} />
+        <Route path="*" element={<h2>Not Found</h2>} />
       </Route>
-
-      {/* CardDetails should be a standalone page */}
-      <Route path="/carddetails/:id" element={<CardDetails />} />
-
-      {/* 404 Not Found Page */}
-      <Route path="*" element={<h2>Not Found</h2>} />
     </Routes>
   );
 };
