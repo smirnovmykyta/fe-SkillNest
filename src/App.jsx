@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
-// import Header from "./components/Header";
 import Bottomnav from "./components/Bottomnav";
 
 const App = () => {
