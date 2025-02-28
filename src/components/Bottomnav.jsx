@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Searchbar from "./Searchbar";
 
 const Bottomnav = () => {
   const navigate = useNavigate();
@@ -20,13 +21,14 @@ const Bottomnav = () => {
         navigate("/");
         break;
       default:
-        navigate("*");
+        navigate("/profile");
         break;
     }
   };
 
   return (
     <div>
+      <Searchbar />
       <div className="btm-nav p-2 flex justify-between items-center fixed bottom-0 w-full shadow-md">
         <button
           className="flex flex-col items-center justify-center rounded-full bg-gray-400 px-4 py-2 hover:bg-gray-600"
