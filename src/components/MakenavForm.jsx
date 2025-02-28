@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 const MakenavForm = () => {
   // const [counter, setCounter] = useState(0);
+  const [date, setDate] = useState("")
+  const [time, setTime] = useState("")
   const [formData, setFormData] = useState({
     // fName: " ",
     // lName: " ",
@@ -16,12 +18,12 @@ const MakenavForm = () => {
     subcategory: "JavaScript",
     isGroup: false,
     // creationDate: "",
-    timeAvailability: [{ date: "", time: "" }],
+    timeAvailability: [],
     expiration: "1 Month",
     onlineteaching: false,
     location: "",
     aktive: true,
-    languages: "",
+    languages: [],
   });
 
   // useEffect(() => {
@@ -39,29 +41,26 @@ const MakenavForm = () => {
     });
   };
 
-  const handleTimeAvailabilityChange = (index, e) => {
+  const handleTimeAvailabilityChange = ( e) => {
     const { name, value } = e.target;
-    const newTimeAvailability = formData.timeAvailability.map((item, i) => {
-      if (i === index) {
-        return { ...item, [name]: value };
-      }
-      return item;
-    });
-    setFormData({ ...formData, timeAvailability: newTimeAvailability });
+    name === 'date' ? setDate(value) : setTime(value)
   };
 
   const addTimeAvailability = () => {
+    if (!date || !time) return
     setFormData({
       ...formData,
-      timeAvailability: [...formData.timeAvailability, { date: "" }],
+      timeAvailability: [...formData.timeAvailability, { date, time }],
     });
+    setDate("");
+    setTime("")
   };
 
-  const removeTimeAvailability = (indexToRemove) => {
+  const removeTimeAvailability = (key) => {
     setFormData({
       ...formData,
       timeAvailability: formData.timeAvailability.filter(
-        (_, index) => index !== indexToRemove
+        (_, index) => index !== key
       ),
     });
   };
@@ -253,33 +252,22 @@ const MakenavForm = () => {
           <label className="label">
             <span className="mr-1 label-text">Time Availability: </span>
           </label>
-          {formData.timeAvailability.map((item, index) => (
-            <div key={index} className="flex space-x-2 mb-2">
+            <div className="flex space-x-2 mb-2">
               <input
-                required
                 type="date"
                 name="date"
-                value={item.date}
-                onChange={(e) => handleTimeAvailabilityChange(index, e)}
+                value={date}
+                onChange={(e) => handleTimeAvailabilityChange(e)}
                 className="input input-bordered"
               />
               <input
-                required
                 type="time"
                 name="time"
-                value={item.time}
-                onChange={(e) => handleTimeAvailabilityChange(index, e)}
+                value={time}
+                onChange={(e) => handleTimeAvailabilityChange(e)}
                 className="input input-bordered"
               />
-              <button
-                type="button"
-                onClick={() => removeTimeAvailability(index)}
-                className="btn btn-error"
-              >
-                Remove
-              </button>
             </div>
-          ))}
           <button
             type="button"
             onClick={addTimeAvailability}
@@ -300,10 +288,16 @@ const MakenavForm = () => {
               </thead>
               <tbody>
                 {formData.timeAvailability.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.date}</td>
-                    <td>{item.time}</td>
-                  </tr>
+                    <tr key={index}>
+                      <td>{item.date}</td>
+                      <td>{item.time}</td>
+                      <td
+                          onClick={() => removeTimeAvailability(index)}
+                          className="btn btn-error"
+                      >
+                        x
+                      </td>
+                    </tr>
                 ))}
               </tbody>
             </table>
@@ -364,7 +358,7 @@ const MakenavForm = () => {
           <select
             required
             name="subcategory"
-            value={formData.subcategory}
+            value={formData.languages}
             onChange={handleChange}
             className="select select-bordered ml-auto "
           >
@@ -381,7 +375,7 @@ const MakenavForm = () => {
           </label>
           <select
             required
-            name="subcategory"
+            name="qualification"
             value={formData.languages}
             onChange={handleChange}
             className="select select-bordered ml-auto "
