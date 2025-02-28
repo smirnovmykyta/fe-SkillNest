@@ -6,6 +6,7 @@ import { languages } from "../constant/languages.js";
 import { category } from "../constant/category.js";
 import { qualifications } from "../constant/qualifications.js";
 import {lessonMode} from "../constant/lessonMode.js";
+import {createAdvertisement} from "../api/advertisementApi.js";
 
 const CreateAdvertisement = () => {
   const [date, setDate] = useState("");
@@ -74,8 +75,14 @@ const CreateAdvertisement = () => {
       ),
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try{
+      const res = await createAdvertisement(formData);
+      console.info(res)
+    } catch (err) {
+      console.error(err)
+    }
     console.log("NOA", formData);
   };
   return (
