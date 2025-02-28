@@ -1,4 +1,3 @@
-import mockCardDetails from "../mock/CardDetails.json";
 import Card from "./Card";
 import {useEffect, useState} from "react";
 import {getAllAdvertisement} from "../api/advertisementApi.js";
