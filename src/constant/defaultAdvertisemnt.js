@@ -1,0 +1,15 @@
+export const defaultAdvertisemnt = {
+  media: [],
+  title: "",
+  description: "",
+  myoffer: "",
+  looking_for: "",
+  request: "",
+  category: "",
+  subcategory: "",
+  isGroup: false,
+  timeAvailability: [],
+  onlineteaching: false,
+  location: "",
+  languages: [],
+};
