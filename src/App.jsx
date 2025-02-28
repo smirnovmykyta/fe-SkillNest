@@ -7,7 +7,6 @@ const App = () => {
   return (
     <>
       {/* <Header /> */}
-
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Bottomnav />} />
