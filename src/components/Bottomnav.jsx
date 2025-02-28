@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Searchbar from "./Searchbar";
 
 const Bottomnav = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Bottomnav = () => {
         navigate("/");
         break;
       default:
-        navigate("*");
+        navigate("/profile");
         break;
     }
   };

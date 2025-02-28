@@ -1,18 +1,24 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Header from "./Header";
-import mockCardDetails from "../mock/CardDetails.json";
+import {getAdvertisementById} from "../api/advertisementApi.js";
 
 const CardDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate(); // Hook to navigate between pages
   const [card, setCard] = useState(null);
 
-  const cardDetails = mockCardDetails.cards;
 
   useEffect(() => {
-    const selectedCard = cardDetails.find((card) => card.id === Number(id));
-    setCard(selectedCard);
+    const fetchData = async () => {
+    try {
+      const selectedCard = await getAdvertisementById(id);
+
+      setCard(selectedCard);
+    }catch (err){
+      console.error(err);
+    }
+    }
+    fetchData();
   }, [id]);
 
   if (!card) return <p>Loading...</p>;
@@ -22,18 +28,18 @@ const CardDetails = () => {
       {/* <Header /> */}
 
       <div className="relative rounded-xl border-2 border-gray-100 bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-4">
-        <h1 className="text-2xl font-bold">{card.name}</h1>
+        <h1 className="text-2xl font-bold">{card.username}</h1>
         <img
-          src={card.img}
-          alt={card.name}
+          src={card.media[0]}
+          alt={card.username}
           className="w-32 h-32 rounded-full"
         />
-        <p className="mt-4">{card.text}</p>
+        <p className="mt-4">{card.description}</p>
         <p className="mt-2">
-          <strong>Biete:</strong> {card.biete}
+          <strong>Offer:</strong> {card.offer}
         </p>
         <p className="mt-2">
-          <strong>Suche:</strong> {card.suche}
+          <strong>Looking for:</strong> {card.request}
         </p>
 
         {/* Back to Home Button */}
