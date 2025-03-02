@@ -1,6 +1,7 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useRevalidator } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAdvertisementById } from "../api/advertisementApi.js";
+import { getUserById } from "../api/userApi.js";
 
 const CardDetails = () => {
   const { id } = useParams();
@@ -11,7 +12,8 @@ const CardDetails = () => {
     const fetchData = async () => {
       try {
         const selectedCard = await getAdvertisementById(id);
-
+        //wird einer eigenschaft namens _user zugewiesen im objekt das in der karte selectedcard gespeichert wird
+        selectedCard._user = await getUserById(selectedCard.userId);
         setCard(selectedCard);
       } catch (err) {
         console.error(err);
@@ -41,9 +43,26 @@ const CardDetails = () => {
             />
           </a>
         </div>
-        {/* Nutzername, wo wir noch eine API schreiben muessen um dran zu kommen */}
 
         <div className="flex-1">
+          <div>
+            userName:{card._user ? card._user.username : "unknown user"}
+            {card._user &&
+              card._user.phoneNumber &&
+              card._user.phoneNumber !== "" && (
+                <a
+                  title={card._user.phoneNumber}
+                  href={`tel:${card._user.phoneNumber}`}
+                >
+                  📞
+                </a>
+              )}
+            {card._user && (
+              <a title={card._user.email} href={`mailto:${card._user.email}`}>
+                ✉️
+              </a>
+            )}
+          </div>
           {/* Title and Verified Badge */}
           <div className="flex justify-between items-center">
             <h3 className="font-medium sm:text-lg">{card.title}</h3>
@@ -127,7 +146,6 @@ const CardDetails = () => {
             />
           </div>
         </div>
-
         {/* <p className="mt-2">
           expirationDate:{" "}
           {card.expirationDate ? card.expirationDate.toDateString() : "never"}
