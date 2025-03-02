@@ -25,7 +25,7 @@ const CardDetails = () => {
   return (
     <article
       key={card._id}
-      className="relative rounded-xl border-2 border-gray-100 bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-4"
+      className="relative rounded-xl border-2 border-gray-100 bg-white shadow-2xl hover:shadow-lg transition-shadow duration-300 ml-10 mr-10 p-4"
     >
       {/* Heart Icon */}
       <div className="absolute top-2 right-2 text-xl cursor-pointer">❤️</div>
