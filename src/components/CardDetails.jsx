@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getAdvertisementById } from "../services/api/advertisements";
+import { getAdvertisementById } from "../api/advertisementApi.js";
 
 const CardDetails = () => {
   const { id } = useParams();
@@ -8,7 +8,16 @@ const CardDetails = () => {
   const [card, setCard] = useState(null);
 
   useEffect(() => {
-    setCard(getAdvertisementById(parseInt(id)));
+    const fetchData = async () => {
+      try {
+        const selectedCard = await getAdvertisementById(id);
+
+        setCard(selectedCard);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchData();
   }, [id]);
 
   if (!card) return <p>Loading...</p>;
