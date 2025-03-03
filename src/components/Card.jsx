@@ -1,8 +1,29 @@
+// import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+// import { getAdvertisementById } from "../api/advertisementApi.js";
+
+// import { useNavigate } from "react-router-dom";
 import FavoriteToggle from "./FavoriteToggle";
+// import { getUserById } from "../api/userApi.js";
 
 const Card = ({ card }) => {
+  // const { id } = useParams();
+
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const users = await getAdvertisementById(id);
+  //       //wird einer eigenschaft namens _user zugewiesen im objekt das in der karte selectedcard gespeichert wird
+  //       users._user = await getUserById(users.userId);
+  //       setCard(users);
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [id]);
 
   const handleClick = (id) => {
     navigate(`/carddetails/${id}`);
@@ -23,7 +44,7 @@ const Card = ({ card }) => {
           <a href="#" className="block">
             <img
               src={card.media && card.media.length ? card.media[0] : "#"}
-              className="w-20 h-20 rounded-full object-cover"
+              className="w-30 h-30 rounded-full object-cover"
             />
           </a>
         </div>
@@ -31,12 +52,13 @@ const Card = ({ card }) => {
         <div className="flex-1">
           {/* Title and Verified Badge */}
           <div className="flex justify-between items-center">
+            {/* userName:{card._user ? card._user.phoneNumber : "unknown user"} */}
             <h3 className="font-medium sm:text-lg">{card.title}</h3>
           </div>
 
           {/* Biete and Suche */}
-          <p className="mt-2">Offering: {card.offer}</p>
-          <p className="mt-2">Looking for: {card.request}</p>
+          <p className="mt-1">Offering: {card.offer}</p>
+          <p className="mt-1">Looking for: {card.request}</p>
 
           {/* Accordion for Text */}
           {/* freier Text fehlt im AdvertisementModel.js */}
@@ -115,18 +137,6 @@ const Card = ({ card }) => {
             />
           </div>
         </div>
-      </div>
-
-      {/* Verified Badge - TODO: separate component? */}
-      <div className="flex justify-end">
-        <strong className="inline-flex items-center gap-1 rounded-ss-xl rounded-ee-xl bg-blue-500 px-3 py-1.5 text-white">
-          <img
-            alt="verifiziert"
-            src="/assets/verified.svg"
-            className="size-4"
-          />
-          <span className="text-[10px] font-medium sm:text-xs">Verified</span>
-        </strong>
       </div>
     </article>
   );
