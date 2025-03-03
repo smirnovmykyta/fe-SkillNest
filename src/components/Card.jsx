@@ -22,8 +22,7 @@ const Card = ({ card }) => {
         <div className="w-full flex justify-center sm:w-auto">
           <a href="#" className="block">
             <img
-              alt={card.username}
-              src={card.media[0]}
+              src={card.media && card.media.length ? card.media[0] : "#"}
               className="w-20 h-20 rounded-full object-cover"
             />
           </a>
@@ -32,32 +31,62 @@ const Card = ({ card }) => {
         <div className="flex-1">
           {/* Title and Verified Badge */}
           <div className="flex justify-between items-center">
-            <h3 className="font-medium sm:text-lg">{card.username}</h3>
+            <h3 className="font-medium sm:text-lg">{card.title}</h3>
           </div>
 
           {/* Biete and Suche */}
-          <p className="mt-2">Offer: {card.offer}</p>
+          <p className="mt-2">Offering: {card.offer}</p>
           <p className="mt-2">Looking for: {card.request}</p>
 
           {/* Accordion for Text */}
+          {/* freier Text fehlt im AdvertisementModel.js */}
           <div className="mt-3 text-sm text-gray-700">
             {/* TODO: Use CSS to style ellipsis of long text */}
-            <p className="line-clamp-2">{card.description.substring(0, 100)}...</p>
+            <p className="line-clamp-2">
+              {card.description.substring(0, 100)}...
+            </p>
           </div>
 
           {/* Languages and Availability */}
           <div className="mt-2 flex flex-wrap items-center gap-2">
-            {card.languages.map((el) => <p className="text-xs text-gray-500">{el.language}</p>)}
+            <p className="text-xs text-gray-500">
+              {card.languages
+                .map((lang) => `${lang.language} (${lang.qualification})`)
+                .join(", ")}
+            </p>
+
+            <span className="hidden sm:block" aria-hidden="true">
+              &middot;
+            </span>
+
+            {/* 
             <span className="hidden sm:block" aria-hidden="true">
               &middot;
             </span>
             <p className="text-xs text-gray-500">
-              <span className="font-medium">{card.lessonMode}</span>
+              <span className="font-medium">
+                {card.timeAvailability.map((t) => t.toString()).join(", ")}
+              </span>
+            </p> */}
+
+            {/* Online / in-person */}
+            <p className="mt-2">
+              Online:{" "}
+              {card.lessonMode === "online" || card.lessonMode === "both"
+                ? "yes"
+                : "no"}
+            </p>
+            <p className="mt-2">
+              in-person:{" "}
+              {card.lessonMode === "in-person" || card.lessonMode === "both"
+                ? "yes"
+                : "no"}
             </p>
           </div>
 
-          {/* Rating (Stars) */}
+          {/* Rating (Stars) - TODO: separate component */}
           <div className="rating mt-4">
+            {/* TODO: do this in a loop; display current rating? */}
             <input
               type="radio"
               name={`rating-${card._id}`}
@@ -88,23 +117,14 @@ const Card = ({ card }) => {
         </div>
       </div>
 
-      {/* Verified Badge */}
+      {/* Verified Badge - TODO: separate component? */}
       <div className="flex justify-end">
         <strong className="inline-flex items-center gap-1 rounded-ss-xl rounded-ee-xl bg-blue-500 px-3 py-1.5 text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
+          <img
+            alt="verifiziert"
+            src="/assets/verified.svg"
             className="size-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-            />
-          </svg>
+          />
           <span className="text-[10px] font-medium sm:text-xs">Verified</span>
         </strong>
       </div>
