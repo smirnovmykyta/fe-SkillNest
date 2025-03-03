@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import FavoriteToggle from "./FavoriteToggle";
 
 const Card = ({ card }) => {
   const navigate = useNavigate();
@@ -13,8 +14,7 @@ const Card = ({ card }) => {
       key={card._id}
       className="relative rounded-xl border-2 border-gray-100 bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-4"
     >
-      {/* Heart Icon */}
-      <div className="absolute top-2 right-2 text-xl cursor-pointer">❤️</div>
+      <FavoriteToggle card={card} />
 
       {/* Card Content */}
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">

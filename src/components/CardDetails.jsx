@@ -2,6 +2,7 @@ import { useParams, useNavigate, useRevalidator } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAdvertisementById } from "../api/advertisementApi.js";
 import { getUserById } from "../api/userApi.js";
+import FavoriteToggle from "./FavoriteToggle.jsx";
 
 const CardDetails = () => {
   const { id } = useParams();
@@ -30,7 +31,7 @@ const CardDetails = () => {
       className="relative rounded-xl border-2 border-gray-100 bg-white shadow-2xl hover:shadow-lg transition-shadow duration-300 ml-10 mr-10 p-4"
     >
       {/* Heart Icon */}
-      <div className="absolute top-2 right-2 text-xl cursor-pointer">❤️</div>
+      <FavoriteToggle card={card} />
 
       {/* Card Content */}
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
