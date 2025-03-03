@@ -40,12 +40,12 @@ const Card = ({ card }) => {
 
           {/* Accordion for Text */}
           {/* freier Text fehlt im AdvertisementModel.js */}
-          <div className="mt-3 text-sm text-gray-700">
-            {/* TODO: Use CSS to style ellipsis of long text */}
+          {/* <div className="mt-3 text-sm text-gray-700">
+            TODO: Use CSS to style ellipsis of long text
             <p className="line-clamp-2">
               {card.description.substring(0, 100)}...
             </p>
-          </div>
+          </div> */}
 
           {/* Languages and Availability */}
           <div className="mt-2 flex flex-wrap items-center gap-2">
@@ -70,7 +70,7 @@ const Card = ({ card }) => {
             </p> */}
 
             {/* Online / in-person */}
-            <p className="mt-2">
+            {/* <p className="mt-2">
               Online:{" "}
               {card.lessonMode === "online" || card.lessonMode === "both"
                 ? "yes"
@@ -81,7 +81,7 @@ const Card = ({ card }) => {
               {card.lessonMode === "in-person" || card.lessonMode === "both"
                 ? "yes"
                 : "no"}
-            </p>
+            </p> */}
           </div>
 
           {/* Rating (Stars) - TODO: separate component */}
