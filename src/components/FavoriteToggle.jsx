@@ -3,15 +3,23 @@ import { useUser } from "../context/userContext";
 
 const FavoriteToggle = ({ card }) => {
   const { user, setUser } = useUser();
+
   const toggleFavorite = () => {
     if (user) {
-      const index = user.favoriteAdvertisements.indexOf(card._id);
+      // Create a copy of the favoriteAdvertisements array
+      const updatedFavorites = [...user.favoriteAdvertisements];
+
+      const index = updatedFavorites.indexOf(card._id);
       if (index >= 0) {
-        user.favoriteAdvertisements.splice(index, 1);
+        // Remove the card if it's already in the favorites
+        updatedFavorites.splice(index, 1);
       } else {
-        user.favoriteAdvertisements.push(card._id);
+        // Add the card to the favorites
+        updatedFavorites.push(card._id);
       }
-      setUser(user);
+
+      // Update the user state with the new array
+      setUser({ ...user, favoriteAdvertisements: updatedFavorites });
     }
   };
 
