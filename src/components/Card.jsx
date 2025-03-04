@@ -1,6 +1,10 @@
 // import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import { getAdvertisementById } from "../api/advertisementApi.js";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getAdvertisementById } from "../api/advertisementApi.js";
+import { getUserById } from "../api/userApi.js";
 
 // import { useNavigate } from "react-router-dom";
 import FavoriteToggle from "./FavoriteToggle";
@@ -8,22 +12,23 @@ import FavoriteToggle from "./FavoriteToggle";
 
 const Card = ({ card }) => {
   // const { id } = useParams();
-
+  const [user, setUser] = useState();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const users = await getAdvertisementById(id);
-  //       //wird einer eigenschaft namens _user zugewiesen im objekt das in der karte selectedcard gespeichert wird
-  //       users._user = await getUserById(users.userId);
-  //       setCard(users);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [id]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // const users = await getAdvertisementById(card.userId);
+        //wird einer eigenschaft namens _user zugewiesen im objekt das in der karte selectedcard gespeichert wird
+        // console.log(users);
+        const users = await getUserById(card.userId);
+        setUser(users);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchData();
+  }, [card]);
 
   const handleClick = (id) => {
     navigate(`/carddetails/${id}`);
@@ -31,14 +36,16 @@ const Card = ({ card }) => {
 
   return (
     <article
-      onClick={() => handleClick(card._id)}
       key={card._id}
       className="relative rounded-xl border-2 border-gray-100 bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-4"
     >
       <FavoriteToggle card={card} />
 
       {/* Card Content */}
-      <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+      <div
+        onClick={() => handleClick(card._id)}
+        className="flex flex-col sm:flex-row items-center sm:items-start gap-4"
+      >
         {/* User Image */}
         <div className="w-full flex justify-center sm:w-auto">
           <a href="#" className="block">
@@ -52,7 +59,7 @@ const Card = ({ card }) => {
         <div className="flex-1">
           {/* Title and Verified Badge */}
           <div className="flex justify-between items-center">
-            {/* userName:{card._user ? card._user.phoneNumber : "unknown user"} */}
+            {user ? user.username : "unknown user"}
             <h3 className="font-medium sm:text-lg">{card.title}</h3>
           </div>
 
