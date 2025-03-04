@@ -2,6 +2,7 @@ import { useParams, useNavigate, useRevalidator } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAdvertisementById } from "../api/advertisementApi.js";
 import { getUserById } from "../api/userApi.js";
+import { UserContext } from "../context/UserContext.jsx";
 
 const CardDetails = () => {
   const { id } = useParams();
