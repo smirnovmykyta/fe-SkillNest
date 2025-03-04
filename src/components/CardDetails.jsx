@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getAdvertisementById } from "../api/advertisementApi.js";
 import { getUserById } from "../api/userApi.js";
 import FavoriteToggle from "./FavoriteToggle.jsx";
+import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
 
 const CardDetails = () => {
   const { id } = useParams();
@@ -21,70 +22,105 @@ const CardDetails = () => {
     fetchData();
   }, [id]);
 
-  if (!card) return <p className="text-center mt-10">Loading...</p>;
+  if (!card)
+    return <p className="text-center mt-10 text-gray-600">Loading...</p>;
 
   return (
-    <article className="relative rounded-xl border-2 border-gray-100 bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 max-w-4xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 sm:px-6 md:px-8">
-      {/* Heart Icon */}
-      <FavoriteToggle card={card} />
+    <article className="relative max-w-4xl mx-auto bg-white border border-gray-200 shadow-2xl rounded-2xl overflow-hidden transition-all hover:shadow-xl p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Favorite Toggle */}
+      <FavoriteToggle card={card} className="absolute top-4 right-4" />
 
-      {/* User Info */}
-      <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+      {/* Left Section: User Info & Media */}
+      <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
         <img
           src={card.media?.length ? card.media[0] : "#"}
-          className="w-50 h-50 rounded-full object-cover shadow-md mb-6 ml-8"
+          className="w-50 h-50 rounded-full object-cover shadow-md lg:ml-10 lg:mt-10"
           alt="User profile"
         />
-        <span className="font-semibold text-lg ml-8">
+        <h2 className="text-lg font-semibold text-gray-800">
           {card._user?.username || "Unknown User"}
-        </span>
-        <div className="flex justify-center lg:justify-start gap-3 mt-2 ml-8">
+        </h2>
+
+        {/* Contact Info */}
+        <div className="flex flex-wrap justify-center lg:justify-start gap-4 text-gray-600">
           {card._user?.phoneNumber && (
-            <a href={`tel:${card._user.phoneNumber}`} className="text-blue-500">
-              📞
+            <a
+              href={`tel:${card._user.phoneNumber}`}
+              className="flex items-center gap-1 hover:text-gray-800 transition"
+            >
+              <HiOutlinePhone className="text-xl" />
+              <span className="hidden sm:inline">{card._user.phoneNumber}</span>
             </a>
           )}
           {card._user?.email && (
-            <a href={`mailto:${card._user.email}`} className="text-blue-500">
-              ✉️
+            <a
+              href={`mailto:${card._user.email}`}
+              className="flex items-center gap-1 hover:text-gray-800 transition"
+            >
+              <HiOutlineMail className="text-xl" />
+              <span className="hidden sm:inline">{card._user.email}</span>
             </a>
           )}
         </div>
       </div>
 
-      {/* Card Content */}
-      <div className="flex flex-col space-y-3 text-center lg:text-left">
-        <h3 className="text-xl font-semibold">{card.title}</h3>
-        <p className="text-gray-600">Offering: {card.offer}</p>
-        <p className="text-gray-600">Looking for: {card.request}</p>
-        <p className="text-sm text-gray-700 line-clamp-3">{card.description}</p>
-
-        {/* Availability & Mode */}
-        <p className="text-sm text-gray-500">
-          Languages:{" "}
-          {card.languages
-            ?.map((lang) => `${lang.language} (${lang.qualification})`)
-            .join(", ")}
+      {/* Right Section: Card Details */}
+      <div className="flex flex-col space-y-3 text-gray-700">
+        <h3 className="text-xl font-bold text-gray-900">{card.title}</h3>
+        <p>
+          <span className="font-semibold">Offering:</span> {card.offer}
         </p>
-        <p className="text-sm text-gray-500">
-          Availability: {card.timeAvailability?.join(", ")}
+        <p>
+          <span className="font-semibold">Looking for:</span> {card.request}
         </p>
+        <p className="text-sm text-gray-600">{card.description}</p>
 
-        <p className="text-gray-500 text-sm">Location: {card.location}</p>
-
-        <p className="text-sm text-gray-500">
-          Online: {card.lessonMode.includes("online") ? "Yes" : "No"} |
-          In-person: {card.lessonMode.includes("in-person") ? "Yes" : "No"}
-        </p>
-
-        {/* Rating System */}
-        <div className="flex justify-center lg:justify-start items-center gap-1 mt-4">
-          {[...Array(5)].map((_, i) => (
-            <span key={i} className="text-yellow-400">
-              ★
-            </span>
-          ))}
+        {/* Languages and qualifications */}
+        <div className="text-sm space-y-1">
+          <p>
+            <span className="font-semibold">Languages:</span>{" "}
+            {card.languages
+              ?.map((lang) => `${lang.language} (${lang.qualification})`)
+              .join(", ")}
+          </p>
+          <p>
+            <span className="font-semibold">Availability:</span>{" "}
+            {card.timeAvailability
+              ?.map(
+                (avail) =>
+                  `${new Date(avail.date).toLocaleDateString()} at ${
+                    avail.time
+                  }`
+              )
+              .join(", ")}
+          </p>
+          <p>
+            <span className="font-semibold">Group Learning:</span>{" "}
+            {card.isGroup ? "Yes" : "No"}
+          </p>
+          <div className="flex gap-4">
+            <p className="mt-2">
+              <span className="font-bold "> Online:</span>
+              {card.lessonMode === "online" || card.lessonMode === "both"
+                ? "yes"
+                : "no"}
+            </p>
+            <p className="mt-2">
+              <span className="font-bold"> in-person: </span>
+              {card.lessonMode === "in-person" || card.lessonMode === "both"
+                ? "yes"
+                : "no"}
+            </p>
+          </div>
         </div>
+
+        <p className="text-sm text-gray-600">
+          <span className="font-semibold">Location:</span> {card.location}
+        </p>
+        <p className="text-sm text-gray-600">
+          <span className="font-semibold">Expires on:</span>{" "}
+          {new Date(card.expirationDate).toLocaleDateString()}
+        </p>
       </div>
     </article>
   );

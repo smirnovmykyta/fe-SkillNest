@@ -226,9 +226,10 @@ const Card = ({ card }) => {
 
           {/* Languages */}
           <div className="mt-2 flex flex-wrap items-center gap-2">
-            <p className="text-xs text-gray-500">
+            <p className="text-sm  ">
+              <span className="font-bold"> Languages: </span>
               {card.languages
-                .map((lang) => `${lang.language} (${lang.qualification})`)
+                ?.map((lang) => `${lang.language} (${lang.qualification})`)
                 .join(", ")}
             </p>
           </div>
@@ -240,27 +241,32 @@ const Card = ({ card }) => {
               type="radio"
               name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
+              onClick={(e) => e.stopPropagation()} // Prevent navigating
             />
             <input
               type="radio"
               name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
               defaultChecked
+              onClick={(e) => e.stopPropagation()} // Prevent navigating
             />
             <input
               type="radio"
               name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
+              onClick={(e) => e.stopPropagation()} // Prevent navigating
             />
             <input
               type="radio"
               name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
+              onClick={(e) => e.stopPropagation()} // Prevent navigating
             />
             <input
               type="radio"
               name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
+              onClick={(e) => e.stopPropagation()} // Prevent navigating
             />
           </div>
         </div>
