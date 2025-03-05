@@ -16,7 +16,7 @@ const Card = ({ card }) => {
       className="relative rounded-xl border-2 border-gray-100 bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-4"
     >
       {/* Heart Icon */}
-      <div className="absolute top-2 right-2 text-xl cursor-pointer">❤️</div>
+      {/* <div className="absolute top-2 right-2 text-xl cursor-pointer">❤️</div> */}
 
       {/* Card Content */}
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
@@ -51,8 +51,10 @@ const Card = ({ card }) => {
 
           {/* Languages and Availability */}
           <div className="mt-2 flex flex-wrap items-center gap-2">
-            {card.languages.map((el) => (
-              <p className="text-xs text-gray-500">{el.language}</p>
+            {card.languages.map((el, id) => (
+              <p key={id} className="text-xs text-gray-500">
+                {el.language}
+              </p>
             ))}
             <span className="hidden sm:block" aria-hidden="true">
               &middot;

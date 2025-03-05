@@ -18,6 +18,8 @@ const App = () => {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<CardList />} />
         <Route path="/ad" element={<CreateAdvertisement />} />
+        <Route path="/login" element={<Login />} />
+
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
