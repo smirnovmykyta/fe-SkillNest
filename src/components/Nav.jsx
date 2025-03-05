@@ -35,7 +35,7 @@ const Nav = () => {
     <div>
       {isIphone14Pro ? (
         <div className="btm-nav px-[60px] py-4 flex justify-between items-center  shadow-md">
-          <Link to="search">
+          <Link to="/">
             <button
               className="flex flex-col bg-primary text-white items-center justify-center rounded-full px-4 py-2 hover:bg-gray-600"
               onClick={handlePress}
