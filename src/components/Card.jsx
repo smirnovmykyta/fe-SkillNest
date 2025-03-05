@@ -7,6 +7,8 @@ const Card = ({ card }) => {
     navigate(`/carddetails/${id}`);
   };
 
+  // console.log(typeof card._id);
+
   return (
     <article
       onClick={() => handleClick(card._id)}
@@ -42,12 +44,16 @@ const Card = ({ card }) => {
           {/* Accordion for Text */}
           <div className="mt-3 text-sm text-gray-700">
             {/* TODO: Use CSS to style ellipsis of long text */}
-            <p className="line-clamp-2">{card.description.substring(0, 100)}...</p>
+            <p className="line-clamp-2">
+              {card.description.substring(0, 100)}...
+            </p>
           </div>
 
           {/* Languages and Availability */}
           <div className="mt-2 flex flex-wrap items-center gap-2">
-            {card.languages.map((el) => <p className="text-xs text-gray-500">{el.language}</p>)}
+            {card.languages.map((el) => (
+              <p className="text-xs text-gray-500">{el.language}</p>
+            ))}
             <span className="hidden sm:block" aria-hidden="true">
               &middot;
             </span>
