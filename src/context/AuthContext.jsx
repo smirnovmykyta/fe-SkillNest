@@ -8,24 +8,12 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem("auth")
+      JSON.parse(localStorage.getItem("isAuth"))
   );
 
-  // const login = () => {
-  //   setIsAuthenticated(true);
-  //   localStorage.setItem("auth", "true");
-  // };
-
-  // const logout = () => {
-  //   setIsAuthenticated(false);
-  //   localStorage.removeItem("auth");
-  //   // localStorage.removeItem("token");
-  // };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated }}>
-      {" "}
-      //login, logout
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
