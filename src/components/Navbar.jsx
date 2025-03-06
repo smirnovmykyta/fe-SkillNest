@@ -26,17 +26,6 @@ const Navbar = () => {
     }
   };
 
-  // 🔹 Prevent horizontal scrolling (global fix)
-  useEffect(() => {
-    document.documentElement.classList.add("overflow-x-hidden");
-    document.body.classList.add("overflow-x-hidden");
-
-    return () => {
-      document.documentElement.classList.remove("overflow-x-hidden");
-      document.body.classList.remove("overflow-x-hidden");
-    };
-  }, []);
-
   return (
     <>
       {/* Top Navbar (Desktop Only) */}
