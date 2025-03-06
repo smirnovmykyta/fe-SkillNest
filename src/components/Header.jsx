@@ -10,7 +10,7 @@ const Header = () => {
       </div>
       <div className="flex gap-4 justify-end mr-10">
         <button className="btn btn-active btn-accent gap-4">
-          <Link to={"login"}>Log In</Link>
+          <Link to={"login"}>Login</Link>
         </button>
         <button className="btn btn-ghost hover:btn">
           <Link to={"register"}>Register</Link>
