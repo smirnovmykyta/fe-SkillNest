@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {validators} from "../helpers/validaation.js";
 import {login} from "../api/authAPI.js";
+import {useUser} from "../context/UserContext.jsx";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const {setUser} = useUser();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const [error, setError] = useState({ email: "", password: "" });
-  const navigate = useNavigate();
+  const [error, setError] = useState("");
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,8 +21,19 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData.email);
+    console.log(formData.password);
+
     const res = await login(formData.email, formData.password);
-    return res.status === 200 ? setUser(res.data.user) : setError(res.data.msg);
+    console.log(res)
+    if(res.status === 200) {
+      console.log("Ok")
+      setUser(res.data.user);
+      navigate("/");
+    } else {
+      console.log(res.data.msg)
+      setError(res.data.msg)
+    };
   };
 
   return (

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Routes, Route, useNavigate, Re } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
 import CardDetails from "./components/CardDetails";
 import CardList from "./components/CardList";
