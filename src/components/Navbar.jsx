@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import icons from "../constant/icons.js";
 import { useState, useEffect } from "react";
 
-const NavbarEdited = () => {
+const Navbar = () => {
   const navigate = useNavigate();
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -72,4 +72,4 @@ const NavbarEdited = () => {
   );
 };
 
-export default NavbarEdited;
+export default Navbar;
