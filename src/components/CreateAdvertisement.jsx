@@ -106,19 +106,6 @@ const CreateAdvertisement = () => {
           />
         </div>
 
-        {/* Title */}
-        <div className="flex flex-col">
-          <label className="label">Title:</label>
-          <input
-            required
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            className="input input-bordered w-full"
-          />
-        </div>
-
         {/* Description */}
         <div className="flex flex-col">
           <label className="label">Description:</label>
