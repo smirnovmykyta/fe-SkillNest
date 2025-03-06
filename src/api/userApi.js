@@ -36,7 +36,7 @@ export async function getUserById(userId) {
 
     return response.data;
   } catch (err) {
-    alert("Something went wrong, please try again later.");
+    // alert("Something went wrong, please try again later.");
     console.error(err);
   }
 }
