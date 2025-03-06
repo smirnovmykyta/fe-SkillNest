@@ -1,4 +1,4 @@
-<svg width="52.917mm" height="52.917mm" version="1.1" viewBox="0 0 52.917 52.917" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="45.095mm" height="6.2673mm" version="1.1" viewBox="0 0 45.095 6.2673" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <mask id="mask18" maskUnits="userSpaceOnUse">
    <g transform="translate(5.933 3.141)">
@@ -38,12 +38,12 @@
     </g>
    </g>
   </mask>
-  <radialGradient id="radialGradient32" cx="86.901" cy="50.921" r="26.458" gradientTransform="translate(-32.928 15.528)" gradientUnits="userSpaceOnUse" spreadMethod="reflect">
+  <radialGradient id="radialGradient32" cx="86.901" cy="50.921" r="26.458" gradientTransform="translate(-63.049 -5.6127)" gradientUnits="userSpaceOnUse" spreadMethod="reflect">
    <stop stop-opacity="0" offset="0"/>
    <stop offset=".058319"/>
   </radialGradient>
  </defs>
- <g transform="translate(-27.515 -39.991)">
+ <g transform="translate(-65.289 -64.542)">
   <g fill="#14aaaa">
    <path transform="translate(-169.18 -78.415)" d="m106.06 40.833a13.229 13.229 0 0 1-13.229 13.229 13.229 13.229 0 0 1-13.229-13.229 13.229 13.229 0 0 1 13.229-13.229 13.229 13.229 0 0 1 13.229 13.229z" mask="url(#mask18)" stop-color="#000000"/>
    <path transform="translate(-169.18 -78.415)" d="m106.06 67.291a13.229 13.229 0 0 1-13.229 13.229 13.229 13.229 0 0 1-13.229-13.229 13.229 13.229 0 0 1 13.229-13.229 13.229 13.229 0 0 1 13.229 13.229z" mask="url(#mask15)" stop-color="#000000"/>
@@ -51,7 +51,8 @@
    <path transform="rotate(90 47.451 -69.736)" d="m106.06 67.291c0 7.3063-5.9229 13.229-13.229 13.229-7.3063 0-13.229-5.9229-13.229-13.229s5.9229-13.229 13.229-13.229c7.3063-1e-6 13.229 5.9229 13.229 13.229z" mask="url(#mask6)" stop-color="#000000"/>
   </g>
   <rect x="164.97" y="48.356" width="26.458" height="26.458" fill="#fff"/>
-  <text x="111.6811" y="38.526707" fill="#000000" font-family="Arial" font-size="8.4667px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal" xml:space="preserve"><tspan x="111.6811" y="38.526707" fill="#000000" font-family="Arial" font-size="8.4667px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">SKILLNEST</tspan></text>
-  <path d="m53.974 39.991a13.229 13.229 0 0 0-13.229 13.229 13.229 13.229 0 0 1 13.229 13.229 13.229 13.229 0 0 1 13.229-13.229 13.229 13.229 0 0 0-13.229-13.229zm13.229 13.229a13.229 13.229 0 0 1-13.229 13.229 13.229 13.229 0 0 1 13.229 13.229 13.229 13.229 0 0 0 13.229-13.229 13.229 13.229 0 0 0-13.229-13.229zm0 26.458a13.229 13.229 0 0 1-13.229-13.229 13.229 13.229 0 0 1-13.229 13.229 13.229 13.229 0 0 0 13.229 13.229 13.229 13.229 0 0 0 13.229-13.229zm-26.458 0a13.229 13.229 0 0 1 13.229-13.229 13.229 13.229 0 0 1-13.229-13.229 13.229 13.229 0 0 0-13.229 13.229 13.229 13.229 0 0 0 13.229 13.229z" fill="url(#radialGradient32)"/>
+  <text x="64.908936" y="70.705956" fill="#000000" font-family="Arial" font-size="8.4667px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal" xml:space="preserve"><tspan x="64.908936" y="70.705956" fill="#000000" font-family="Arial" font-size="8.4667px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">SKILLNEST</tspan></text>
+  <path d="m23.852 18.85a13.229 13.229 0 0 0-13.229 13.229 13.229 13.229 0 0 1 13.229 13.229 13.229 13.229 0 0 1 13.229-13.229 13.229 13.229 0 0 0-13.229-13.229zm13.229 13.229a13.229 13.229 0 0 1-13.229 13.229 13.229 13.229 0 0 1 13.229 13.229 13.229 13.229 0 0 0 13.229-13.229 13.229 13.229 0 0 0-13.229-13.229zm0 26.458a13.229 13.229 0 0 1-13.229-13.229 13.229 13.229 0 0 1-13.229 13.229 13.229 13.229 0 0 0 13.229 13.229 13.229 13.229 0 0 0 13.229-13.229zm-26.458 0a13.229 13.229 0 0 1 13.229-13.229 13.229 13.229 0 0 1-13.229-13.229 13.229 13.229 0 0 0-13.229 13.229 13.229 13.229 0 0 0 13.229 13.229z" fill="url(#radialGradient32)"/>
+  <circle cx="86.901" cy="50.921" r=".59937" fill="#fff"/>
  </g>
 </svg>
