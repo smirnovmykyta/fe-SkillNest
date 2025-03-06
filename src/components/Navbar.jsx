@@ -34,7 +34,7 @@ const Navbar = () => {
           <Link key={index} to={icon.link}>
             <div
               onClick={handlePress}
-              className="flex flex-col items-center justify-between px-6 py-2 rounded-lg cursor-pointer hover:bg-purple-500 hover:text-white transition-all duration-300"
+              className="flex flex-col items-center justify-between px-6 py-2 rounded-lg cursor-pointer hover:bg-[#4c34c8] hover:text-white transition-all duration-300"
             >
               <div className="text-xl">{<icon.icon />}</div>
               <div className="text-sm font-medium">{icon.name}</div>

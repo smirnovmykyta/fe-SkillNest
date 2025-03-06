@@ -11,10 +11,10 @@ const Header = () => {
       </div>
       <Navbar className="" />
       <div className="flex gap-4 justify-end mr-10">
-        <button className="btn btn-active btn-accent gap-4">
+        <button className="btn btn-primary gap-4">
           <Link to={"login"}>Log In</Link>
         </button>
-        <button className="btn btn-ghost hover:btn">
+        <button className="btn btn-ghost hover:btn hover:bg-[#4c34c8] hover:text-white">
           <Link to={"register"}>Register</Link>
         </button>
       </div>
