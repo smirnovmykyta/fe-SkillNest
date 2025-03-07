@@ -90,24 +90,18 @@ const CreateAdvertisement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if required fields like languages and timeAvailability are not empty
     if (formData.languages.length === 0) {
       toast.error("Please add at least one language.");
-      return; // Stop the form submission
+      return;
     }
 
     try {
       const res = await createAdvertisement(formData);
 
-      // Check the backend response (assuming it returns a success flag)
-      // if (res && res.success) {
       toast.success("Advertisement created successfully!");
-      // } else {
-      //   throw new Error(res?.message || "Failed to create advertisement");
-      // }
-      navigate(`/carddetails/${res._id}`);
+
+      navigate(`/card/${res._id}`);
     } catch (err) {
-      // Catch any errors and display a toast
       toast.error("Ops, failed to create advertisement, try again!");
     }
   };
