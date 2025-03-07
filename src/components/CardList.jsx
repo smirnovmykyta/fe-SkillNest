@@ -1,7 +1,7 @@
 import Card from "./Card";
 import { useEffect, useState } from "react";
 import { getAllAdvertisement } from "../api/advertisementApi.js";
-import { useUser } from "../context/userContext.jsx";
+import {useUser} from "../context/UserContext.jsx";
 
 const CardList = () => {
   const [adList, setAdList] = useState("");
