@@ -1,5 +1,6 @@
 import React from "react";
-import { useUser } from "../context/userContext";
+import {useUser} from "../context/UserContext.jsx";
+
 
 const FavoriteToggle = ({ card }) => {
   const { user, setUser } = useUser();
