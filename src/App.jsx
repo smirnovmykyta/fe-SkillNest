@@ -16,14 +16,14 @@ const App = () => {
     <>
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            <Route index element={<CardList />} />
+            <Route index element={<CardList type="all"/>} />
             <Route path="/card/:id" element={<CardDetails />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
 
             <Route element={<ProtectedRoute />}>
               <Route path="/ad" element={<CreateAdvertisement />} />
-              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/favorites" element={<CardList type="favorites" />} />
               <Route path="/message" element={<Messages />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
