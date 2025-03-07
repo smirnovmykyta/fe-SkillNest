@@ -7,7 +7,7 @@ import { LuCircleUser } from "react-icons/lu";
 const icons = [
   { name: "Search", icon: BiSearchAlt, link: "/" },
   { name: "Favorites", icon: GrFavorite, link: "/favorites" },
-  { name: "Ad", icon: AiOutlineFileAdd, link: "/caform" },
+  { name: "Ad", icon: AiOutlineFileAdd, link: "/ad" },
   { name: "Chat", icon: LuMessageCircleMore, link: "/chat" },
   { name: "Profile", icon: LuCircleUser, link: "/profile" },
 ];
