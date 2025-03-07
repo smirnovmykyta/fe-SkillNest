@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
 import CardDetails from "./components/CardDetails";
 import CardList from "./components/CardList";
@@ -10,33 +8,29 @@ import Login from "./components/Login.jsx";
 import Favorites from "./components/Favorites.jsx";
 import Messages from "./components/Messages.jsx";
 import Profile from "./components/Profile.jsx";
+import ProtectedRoute from "./Layouts/ProtectedRoute.jsx";
+import NotFound from "./components/NotFound.jsx";
 
 const App = () => {
-  const [authenticated, setAuthenticated] = useState(true);
-  const navigate = useNavigate();
-
   return (
     <>
-      {authenticated ? (
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<CardList />} />
-            <Route path="/ad" element={<CreateAdvertisement />} />
-            <Route path="/favorites" element={<Favorites />} />
             <Route path="/card/:id" element={<CardDetails />} />
-            <Route path="/message" element={<Messages />} />
-            <Route path="/profile" element={<Profile />} />
-
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+
+            <Route element={<ProtectedRoute />}>
+              <Route path="/ad" element={<CreateAdvertisement />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/message" element={<Messages />} />
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
-      ) : (
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      )}
     </>
   );
 };
