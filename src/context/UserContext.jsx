@@ -1,6 +1,5 @@
 import {createContext, useContext, useEffect, useState} from "react";
-import {getProfile, getUserById} from "../api/userApi";
-import {useAuth} from "./AuthContext.jsx";
+import {getProfile} from "../api/userApi";
 
 const UserContext = createContext();
 
