@@ -21,19 +21,15 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.email);
-    console.log(formData.password);
 
     const res = await login(formData.email, formData.password);
-    console.log(res)
+
     if(res.status === 200) {
-      console.log("Ok")
       setUser(res.data.user);
       navigate("/");
     } else {
-      console.log(res.data.msg)
       setError(res.data.msg)
-    };
+    }
   };
 
   return (
