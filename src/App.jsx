@@ -5,7 +5,6 @@ import CardList from "./components/CardList";
 import CreateAdvertisement from "./components/CreateAdvertisement.jsx";
 import Register from "./components/Register.jsx";
 import Login from "./components/Login.jsx";
-import Favorites from "./components/Favorites.jsx";
 import Messages from "./components/Messages.jsx";
 import Profile from "./components/Profile.jsx";
 import ProtectedRoute from "./Layouts/ProtectedRoute.jsx";
