@@ -66,7 +66,6 @@ const CardDetails = () => {
 
       {/* Right Section: Card Details */}
       <div className="flex flex-col space-y-3 text-gray-700">
-        <h3 className="text-xl font-bold text-gray-900">{card.title}</h3>
         <p>
           <span className="font-semibold">Offering:</span> {card.offer}
         </p>

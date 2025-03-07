@@ -54,13 +54,6 @@ const Card = ({ card }) => {
 
         {/* Card Info */}
         <div className="flex-1">
-          {/* Title and Verified Badge */}
-          <div className="flex justify-between items-center">
-            <h3 className="font-semibold text-lg text-gray-900">
-              {card.title}
-            </h3>
-          </div>
-
           {/* Offering and Looking For */}
           <div className="mt-2 text-sm text-gray-700">
             <p>
