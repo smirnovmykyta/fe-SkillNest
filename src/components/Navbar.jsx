@@ -1,31 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import icons from "../constant/icons.js";
-import { useState, useEffect } from "react";
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const [authenticated, setAuthenticated] = useState(false);
-
-  const handlePress = (e) => {
-    const key = e.currentTarget.children[1].textContent;
-    console.log(key);
-    if (!authenticated) {
-      console.log("Not Authenticated");
-      navigate("/");
-    }
-    switch (key) {
-      case "Adverts":
-        navigate("caform");
-        break;
-      case "Search":
-        navigate("/");
-        break;
-      default:
-        navigate("/profile");
-        break;
-    }
-  };
-
   return (
     <>
       {/* Top Navbar (Desktop Only) */}
@@ -33,7 +9,7 @@ const Navbar = () => {
         {icons.map((icon, index) => (
           <Link key={index} to={icon.link}>
             <div
-              onClick={handlePress}
+              // onClick={handlePress}
               className="flex flex-col items-center justify-between px-6 py-2 rounded-lg cursor-pointer hover:bg-[#4c34c8] hover:text-white transition-all duration-300"
             >
               <div className="text-xl">{<icon.icon />}</div>
@@ -48,7 +24,7 @@ const Navbar = () => {
         {icons.map((icon, index) => (
           <Link key={index} to={icon.link}>
             <div
-              onClick={handlePress}
+              // onClick={handlePress}
               className="flex flex-col items-center cursor-pointer hover:text-purple-400 transition-all duration-300"
             >
               <div className="text-2xl">{<icon.icon />}</div>

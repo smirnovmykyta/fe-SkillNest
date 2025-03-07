@@ -20,7 +20,7 @@ const Card = ({ card }) => {
   }, [card]);
 
   const handleClick = (id) => {
-    navigate(`/carddetails/${id}`);
+    navigate(`/card/${id}`);
   };
 
   return (

@@ -77,3 +77,16 @@ export async function getAdvertisementByUserId(userId) {
         console.error(err);
     }
 }
+
+export async function getFavoriteAdvertisement(ids) {
+    try {
+        const requests = ids.map( (id) =>
+             axios.get(`${import.meta.env.VITE_SERVER_URL}/advertisement/${id}`)
+                .then((res) => res.data))
+
+        return Promise.all(requests);
+    } catch (err) {
+        alert("Something went wrong, please try again later.")
+        console.error(err);
+    }
+}

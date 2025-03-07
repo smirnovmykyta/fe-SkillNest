@@ -1,16 +1,21 @@
 import Card from "./Card";
 import { useEffect, useState } from "react";
-import { getAllAdvertisement } from "../api/advertisementApi.js";
+import {getAllAdvertisement, getFavoriteAdvertisement} from "../api/advertisementApi.js";
 import {useUser} from "../context/UserContext.jsx";
 
-const CardList = () => {
+const CardList = ({ type }) => {
   const [adList, setAdList] = useState("");
   const { user } = useUser();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await getAllAdvertisement();
+        let res;
+        if(type === "favorites"){
+          res = await getFavoriteAdvertisement(user.favoriteAdvertisements)
+        } else {
+          res = await getAllAdvertisement();
+        }
 
         setAdList(res);
       } catch (err) {

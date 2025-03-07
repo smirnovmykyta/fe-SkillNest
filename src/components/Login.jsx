@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {login} from "../api/authAPI.js";
 import {useUser} from "../context/UserContext.jsx";
+import {useAuth} from "../context/AuthContext.jsx";
 
 const Login = () => {
   const navigate = useNavigate();
   const {setUser} = useUser();
+  const {setIsAuthenticated} = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -26,6 +28,7 @@ const Login = () => {
 
     if(res.status === 200) {
       setUser(res.data.user);
+      setIsAuthenticated(true);
       navigate("/");
     } else {
       setError(res.data.msg)

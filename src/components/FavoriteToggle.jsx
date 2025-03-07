@@ -1,11 +1,12 @@
 import React from "react";
 import {useUser} from "../context/UserContext.jsx";
+import {updateUser} from "../api/userApi.js";
 
 
 const FavoriteToggle = ({ card }) => {
   const { user, setUser } = useUser();
 
-  const toggleFavorite = () => {
+  const toggleFavorite = async () => {
     if (user) {
       // Create a copy of the favoriteAdvertisements array
       const updatedFavorites = [...user.favoriteAdvertisements];
@@ -19,6 +20,11 @@ const FavoriteToggle = ({ card }) => {
         updatedFavorites.push(card._id);
       }
 
+      try {
+        await updateUser({...user, favoriteAdvertisements: updatedFavorites})
+      } catch (error){
+        console.error(error)
+      }
       // Update the user state with the new array
       setUser({ ...user, favoriteAdvertisements: updatedFavorites });
     }
