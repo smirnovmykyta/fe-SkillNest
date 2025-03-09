@@ -151,7 +151,7 @@ const EditProfile = ({ user, setUser }) => {
             className="px-4 py-2 bg-indigo-500 text-white rounded"
             type="submit"
           >
-            Save Changes
+            Save changes
           </button>
         </div>
       </div>
