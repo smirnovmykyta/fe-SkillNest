@@ -31,7 +31,7 @@ const Profile = ({ activeTab = "profile" }) => {
         <button
           className={`px-4 py-2 font-medium ${
             activeTab === "profile"
-              ? "border-b-2 border-green-500 text-green-500"
+              ? "border-b-2 border-indigo-500 text-indigo-500"
               : "text-gray-500"
           }`}
           onClick={() => navigate("/profile")}
@@ -41,7 +41,7 @@ const Profile = ({ activeTab = "profile" }) => {
         <button
           className={`px-4 py-2 font-medium ${
             activeTab === "edit"
-              ? "border-b-2 border-green-500 text-green-500"
+              ? "border-b-2 border-indigo-500 text-indigo-500"
               : "text-gray-500"
           }`}
           onClick={() => navigate("/profile/edit")}
@@ -51,7 +51,7 @@ const Profile = ({ activeTab = "profile" }) => {
         <button
           className={`px-4 py-2 font-medium ${
             activeTab === "advertisements"
-              ? "border-b-2 border-green-500 text-green-500"
+              ? "border-b-2 border-indigo-500 text-indigo-500"
               : "text-gray-500"
           }`}
           onClick={() => navigate("/profile/advertisements")}
