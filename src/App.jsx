@@ -13,23 +13,31 @@ import NotFound from "./components/NotFound.jsx";
 const App = () => {
   return (
     <>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<CardList type="all"/>} />
-            <Route path="/card/:id" element={<CardDetails />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<CardList type="all" />} />
+          <Route path="/card/:id" element={<CardDetails />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
 
-            <Route element={<ProtectedRoute />}>
-              <Route path="/ad" element={<CreateAdvertisement />} />
-              <Route path="/favorites" element={<CardList type="favorites" />} />
-              <Route path="/message" element={<Messages />} />
-              <Route path="/profile" element={<Profile />} />
-            </Route>
-
-            <Route path="*" element={<NotFound />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/ad" element={<CreateAdvertisement />} />
+            <Route path="/favorites" element={<CardList type="favorites" />} />
+            <Route path="/message" element={<Messages />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile/edit"
+              element={<Profile activeTab="edit" />}
+            />
+            <Route
+              path="/profile/advertisements"
+              element={<Profile activeTab="advertisements" />}
+            />
           </Route>
-        </Routes>
+
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
     </>
   );
 };
