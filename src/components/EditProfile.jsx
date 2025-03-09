@@ -12,9 +12,9 @@ const EditProfile = ({ user, setUser }) => {
         const match = parts[0].match(/^(\w+)\[(\d+)\]$/);
         if (match) {
           const [_, name, index] = match;
-          updated[name][parseInt(index)] = el.value;
+          valueHolder[name][parseInt(index)] = el.value;
         } else {
-          updated[el.name] = el.value;
+          valueHolder[parts[0]] = el.value;
         }
       }
       updated = await updateUser(updated);
