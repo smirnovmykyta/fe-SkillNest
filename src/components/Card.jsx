@@ -1,120 +1,115 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getUserById } from "../api/userApi.js";
+import FavoriteToggle from "./FavoriteToggle";
 
 const Card = ({ card }) => {
+  const [user, setUser] = useState();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const users = await getUserById(card.userId);
+        setUser(users);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchData();
+  }, [card]);
+
   const handleClick = (id) => {
-    navigate(`/carddetails/${id}`);
+    navigate(`/card/${id}`);
   };
 
-  // console.log(typeof card._id);
-
   return (
-    <article
-      onClick={() => handleClick(card._id)}
-      key={card._id}
-      className="relative rounded-xl border-2 border-gray-100 bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-4"
-    >
-      {/* Heart Icon */}
-      {/* <div className="absolute top-2 right-2 text-xl cursor-pointer">❤️</div> */}
+    <article className="relative rounded-xl border-2 border-gray-100 bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-4">
+      <FavoriteToggle card={card} />
 
       {/* Card Content */}
-      <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
-        {/* User Image */}
-        <div className="w-full flex justify-center sm:w-auto">
+      <div
+        onClick={() => handleClick(card._id)}
+        className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
+      >
+        {/* User Image and User Name Below it */}
+        <div className="flex flex-col items-center sm:w-24 w-full justify-center">
           <a href="#" className="block">
             <img
-              alt={card.username}
-              src={card.media[0]}
-              className="w-20 h-20 rounded-full object-cover"
+              src={card.media && card.media.length ? card.media[0] : "#"}
+              className="w-24 h-24 rounded-full object-cover"
+              alt="User"
             />
           </a>
+
+          {/* Display Username below Image */}
+          {user && (
+            <div className="mt-2 text-center">
+              <span className="text-sm text-gray-500">
+                {user.username || "unknown user"}
+              </span>
+            </div>
+          )}
         </div>
 
+        {/* Card Info */}
         <div className="flex-1">
-          {/* Title and Verified Badge */}
-          <div className="flex justify-between items-center">
-            <h3 className="font-medium sm:text-lg">{card.username}</h3>
-          </div>
-
-          {/* Biete and Suche */}
-          <p className="mt-2">Offer: {card.offer}</p>
-          <p className="mt-2">Looking for: {card.request}</p>
-
-          {/* Accordion for Text */}
-          <div className="mt-3 text-sm text-gray-700">
-            {/* TODO: Use CSS to style ellipsis of long text */}
-            <p className="line-clamp-2">
-              {card.description.substring(0, 100)}...
+          {/* Offering and Looking For */}
+          <div className="mt-2 text-sm text-gray-700">
+            <p>
+              <strong>Offering:</strong> {card.offer}
+            </p>
+            <p>
+              <strong>Looking for:</strong> {card.request}
             </p>
           </div>
 
-          {/* Languages and Availability */}
+          {/* Languages */}
           <div className="mt-2 flex flex-wrap items-center gap-2">
-            {card.languages.map((el, id) => (
-              <p key={id} className="text-xs text-gray-500">
-                {el.language}
-              </p>
-            ))}
-            <span className="hidden sm:block" aria-hidden="true">
-              &middot;
-            </span>
-            <p className="text-xs text-gray-500">
-              <span className="font-medium">{card.lessonMode}</span>
+            <p className="text-sm  ">
+              <span className="font-bold"> Languages: </span>
+              {card.languages
+                ?.map((lang) => `${lang.language} (${lang.qualification})`)
+                .join(", ")}
             </p>
           </div>
 
           {/* Rating (Stars) */}
           <div className="rating mt-4">
+            {/* Simple rating display with stars */}
             <input
               type="radio"
               name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
+              onClick={(e) => e.stopPropagation()} // Prevent navigating
             />
             <input
               type="radio"
               name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
               defaultChecked
+              onClick={(e) => e.stopPropagation()} // Prevent navigating
             />
             <input
               type="radio"
               name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
+              onClick={(e) => e.stopPropagation()} // Prevent navigating
             />
             <input
               type="radio"
               name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
+              onClick={(e) => e.stopPropagation()} // Prevent navigating
             />
             <input
               type="radio"
               name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
+              onClick={(e) => e.stopPropagation()} // Prevent navigating
             />
           </div>
         </div>
-      </div>
-
-      {/* Verified Badge */}
-      <div className="flex justify-end">
-        <strong className="inline-flex items-center gap-1 rounded-ss-xl rounded-ee-xl bg-blue-500 px-3 py-1.5 text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="size-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-            />
-          </svg>
-          <span className="text-[10px] font-medium sm:text-xs">Verified</span>
-        </strong>
       </div>
     </article>
   );

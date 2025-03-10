@@ -1,30 +1,39 @@
 import axios from "axios";
 
-export const login = async (email, password) => {
-  const formState = { email, password, withCredentials: true };
-  let success = false;
+export const registration = async (email, password, username) => {
   try {
-    const res = await axios.post(import.meta.env.VITE_SERVER_URL, formState);
-    const data = res.data;
-    if (res.status !== 200) throw new Error(data.msg);
-    // setUser(data.user); // Diese Funktion sollte in der Komponente aufgerufen werden
-    // setIsAuthenticated(true); // Diese Funktion sollte in der Komponente aufgerufen werden
-    localStorage.setItem("token", data.token); // Optional, wenn Sie Token verwenden
+   return await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/signup`, {email, password, username});
+  } catch (error) {
+    console.error(error.message);
+    return error.response;
+  }
+};
 
-    success = true;
+export const login = async (email, password) => {
+  try {
+    const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/login`, {email, password});
+    const data = res.data;
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("isAuth", JSON.stringify(true));
+    return res;
+  } catch (error) {
+    console.error(error.message);
+    return error.response;
+  }
+};
+
+export const logout = async () => {
+  try {
+    const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/logout`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    const data = res.data;
+    localStorage.removeItem("token");
+    localStorage.removeItem("isAuth");
+    return data;
   } catch (error) {
     console.error(error.message);
   }
-  return success;
-};
-// const logout
-export const logout = () => {
-  //   setIsAuthenticated(false);
-  //   localStorage.removeItem("auth");
-  // localStorage.removeItem("token");
-};
-// const register
-export const register = () => {
-  //   setIsAuthenticated(true);
-  //   localStorage.setItem("auth", "true");
 };

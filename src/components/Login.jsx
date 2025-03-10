@@ -1,43 +1,36 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api/authAPI.js";
-import axios from "axios";
+import { useUser } from "../context/UserContext.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 
-const Login = ({ setAuthenticated }) => {
-  const [error, setError] = useState("");
+const Login = () => {
+  const navigate = useNavigate();
+  const { setUser } = useUser();
+  const { setIsAuthenticated } = useAuth();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("Login...");
-    try {
-      const res = await axios.post(
-        import.meta.env.VITE_SERVER_URL + "/auth/login",
-        {
-          email: e.target.email.value,
-          password: e.target.password.value,
-        }
-      );
-      console.log(typeof res.status);
-      if (res.status === 200 || res.status === 201 || res.status === 202) {
-        const token = res.data.token;
-        localStorage.setItem("token", token);
-        console.log("setAuthenticated", setAuthenticated.toString());
-        setAuthenticated(true);
-        navigate("/");
-      }
-      // console.log("Status is", res.status);
-    } catch (error) {
-      console.error(error);
+
+    const res = await login(formData.email, formData.password);
+
+    if (res.status === 200) {
+      setUser(res.data.user);
+      setIsAuthenticated(true);
+      navigate("/");
+    } else {
+      setError(res.data.msg);
     }
   };
 
@@ -57,6 +50,7 @@ const Login = ({ setAuthenticated }) => {
               id="email"
               type="text"
               name="email"
+              placeholder="Enter email"
               value={formData.email}
               onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"

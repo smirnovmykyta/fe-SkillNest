@@ -4,7 +4,12 @@ export async function createAdvertisement(adData) {
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_SERVER_URL}/advertisement`,
-      adData
+      adData,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
     );
     return response.data;
   } catch (err) {
@@ -43,11 +48,12 @@ export async function updateAdvertisement(adId, adData) {
   try {
     const response = await axios.put(
       `${import.meta.env.VITE_SERVER_URL}/advertisement/${adId}`,
-      adData /*{
-            // headers: {
-            //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-            // },
-        }*/
+      adData,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
     );
 
     return response.data;
@@ -60,11 +66,12 @@ export async function updateAdvertisement(adId, adData) {
 export async function deleteAdvertisement(adId) {
   try {
     const response = await axios.delete(
-      `${import.meta.env.VITE_SERVER_URL}/advertisement/${adId}` /*{
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        }*/
+      `${import.meta.env.VITE_SERVER_URL}/advertisement/${adId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
     );
 
     return response.data;
@@ -81,6 +88,21 @@ export async function getAdvertisementByUserId(userId) {
     );
 
     return response.data;
+  } catch (err) {
+    alert("Something went wrong, please try again later.");
+    console.error(err);
+  }
+}
+
+export async function getFavoriteAdvertisement(ids) {
+  try {
+    const requests = ids.map((id) =>
+      axios
+        .get(`${import.meta.env.VITE_SERVER_URL}/advertisement/${id}`)
+        .then((res) => res.data)
+    );
+
+    return Promise.all(requests);
   } catch (err) {
     alert("Something went wrong, please try again later.");
     console.error(err);
