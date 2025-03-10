@@ -1,5 +1,5 @@
-import {createContext, useContext, useEffect, useState} from "react";
-import {getProfile} from "../api/userApi";
+import { createContext, useContext, useEffect, useState } from "react";
+import { getProfile } from "../api/userApi";
 
 const UserContext = createContext();
 
@@ -13,11 +13,10 @@ export function UserProvider({ children }) {
   useEffect(() => {
     async function profileData() {
       const res = await getProfile();
-      setUser(res)
+      setUser(res);
     }
 
-    if(localStorage.getItem("token")) profileData();
-
+    if (localStorage.getItem("token")) profileData();
   }, []);
 
   return (

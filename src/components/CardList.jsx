@@ -5,6 +5,7 @@ import {
   getFavoriteAdvertisement,
 } from "../api/advertisementApi.js";
 import { useUser } from "../context/UserContext.jsx";
+import Searchbar from "./Searchbar";
 
 const CardList = ({ type }) => {
   const [adList, setAdList] = useState([]);
