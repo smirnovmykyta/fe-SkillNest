@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import {useUser} from "../context/UserContext.jsx";
 
 const Header = () => {
-    const {navigate} = useNavigate();
+    const navigate = useNavigate();
     const {user, setUser} = useUser();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,9 +26,8 @@ const Header = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("isAuth");
         setUser("");
+        navigate("/");
         closeModal();
-        navigate("/")
-
     };
 
     return (
@@ -62,13 +61,13 @@ const Header = () => {
                         <div className="flex justify-end gap-4">
                             <button
                                 className="btn btn-ghost hover:btn hover:bg-[#4c34c8] hover:text-white"
-                                onClick={closeModal} // Закрыть модальное окно без выхода
+                                onClick={closeModal}
                             >
                                 Cancel
                             </button>
                             <button
                                 className="btn btn-primary"
-                                onClick={handleLogout} // Подтвердить выход
+                                onClick={handleLogout}
                             >
                                 Confirm
                             </button>
