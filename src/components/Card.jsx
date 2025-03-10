@@ -75,14 +75,14 @@ const Card = ({ card }) => {
           </div>
 
           {/* Rating (Stars) */}
-          <div className="rating mt-4">
-            {/* Simple rating display with stars */}
-            <input
+          {/* <div className="rating mt-4"> */}
+          {/* Simple rating display with stars */}
+          {/* <input
               type="radio"
               name={`rating-${card._id}`}
               className="mask mask-star-2 bg-green-500"
-              onClick={(e) => e.stopPropagation()} // Prevent navigating
-            />
+              onClick={(e) => e.stopPropagation()} // Prevent navigating */}
+          {/* />
             <input
               type="radio"
               name={`rating-${card._id}`}
@@ -108,7 +108,7 @@ const Card = ({ card }) => {
               className="mask mask-star-2 bg-green-500"
               onClick={(e) => e.stopPropagation()} // Prevent navigating
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </article>
