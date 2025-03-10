@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Routes, Route, useNavigate, Re } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
 import CardDetails from "./components/CardDetails";
 import CardList from "./components/CardList";
@@ -12,31 +12,35 @@ import Messages from "./components/Messages.jsx";
 import Profile from "./components/Profile.jsx";
 
 const App = () => {
-  const [authenticated, setAuthenticated] = useState(true);
+  // console.log("authenticated?", authenticated);
   const navigate = useNavigate();
+  const [authenticated, setAuthenticated] = useState(true);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setAuthenticated(true);
+    } else {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <>
-      {authenticated ? (
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<CardList />} />
-            <Route path="/ad" element={<CreateAdvertisement />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/card/:id" element={<CardDetails />} />
-            <Route path="/message" element={<Messages />} />
-            <Route path="/profile" element={<Profile />} />
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<CardList />} />
+          <Route path="/ad" element={<CreateAdvertisement />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/card/:id" element={<CardDetails />} />
+          <Route path="/message" element={<Messages />} />
+          <Route path="/profile" element={<Profile />} />
 
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-          </Route>
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/register"
+            element={<Register setAuthenticated={setAuthenticated} />}
+          />
           <Route path="/login" element={<Login />} />
-        </Routes>
-      )}
+        </Route>
+      </Routes>
     </>
   );
 };

@@ -1,14 +1,28 @@
 import React from "react";
 
 const Searchbar = () => {
+  const [searchString, setSearchString] = React.useState("");
+  const [results, setResults] = React.useState([]);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get(`/api/search?q=${searchString}`);
+      setResults(response.data);
+    } catch (error) {
+      console.error("Fehler bei der Suche:", error);
+    }
+  };
+
   return (
     <div className="searchbar p-4">
-      <div className="form-control">
+      <div className="form-control" onSubmit={handleSearch}>
         <div className="input-group flex justify-center">
           <input
             type="text"
-            placeholder="Search..."
-            className="input input-bordered max-w-3xl"
+            value={searchString}
+            onChange={(e) => setSearchString(e.target.value)}
+            placeholder="Suche..."
           />
           <button className="btn btn-square">
             <svg
