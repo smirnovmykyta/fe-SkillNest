@@ -94,6 +94,18 @@ export async function getAdvertisementByUserId(userId) {
   }
 }
 
+export async function getAdvertisementBySearch(searchString) {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_SERVER_URL}/api/search?q=${searchString}`
+    );
+    console.log("Live search results:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Fehler bei der Suche:", error);
+  }
+}
+
 export async function getFavoriteAdvertisement(ids) {
   try {
     const requests = ids.map((id) =>
