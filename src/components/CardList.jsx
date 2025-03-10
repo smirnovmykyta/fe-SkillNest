@@ -17,7 +17,7 @@ const CardList = ({ type }) => {
           res = await getAllAdvertisement();
         }
 
-        setAdList(res);
+        setAdList(res.reverse());
       } catch (err) {
         console.error(err);
       }
