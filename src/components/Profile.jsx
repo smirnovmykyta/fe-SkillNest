@@ -25,9 +25,7 @@ const Profile = ({ activeTab = "profile" }) => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-lg mt-6">
-      {/* Tabs for navigation */}
       <div className="flex space-x-4 border-b pb-2 mb-4">
-        {/* TODO: create and use Tailwind classes for active/inactive */}
         <button
           className={`px-4 py-2 font-medium ${
             activeTab === "profile"

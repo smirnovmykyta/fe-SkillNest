@@ -1,58 +1,28 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { getAllAdvertisement } from "../api/advertisementApi"; // ✅ Import function to get all ads
+import { HiX } from "react-icons/hi";
 
 const Searchbar = ({ searchString, setSearchString }) => {
-  // const [searchString, setSearchString] = useState("");
+  const clearSearch = () => {
+    setSearchString("");
+  };
 
-  // useEffect(() => {
-  //   if (!searchString) {
-  //     getAllAdvertisement()
-  //       .then((res) => setAdList(res))
-  //       .catch((err) => console.error("Fehler beim Laden der Anzeigen:", err));
-  //     return;
-  //   }
-
-  //   const delayDebounceFn = setTimeout(async () => {
-  // try {
-  //   const response = await axios.get(
-  //     "http://localhost:8000/api/search?q=" + searchString
-  //   );
-  //   console.log("Live search results:", response.data);
-  //   setAdList(response.data);
-  // } catch (error) {
-  //   console.error("Fehler bei der Suche:", error);
-  // }
-  //   }, 500);
-
-  //   return () => clearTimeout(delayDebounceFn);
-  // }, [searchString]);
-  console.log("Searchbar.jsx", searchString);
   return (
-    <div className="searchbar p-4">
-      <div className="input-group flex justify-center">
+    <div className="flex justify-center">
+      <div className="relative w-full max-w-xs">
         <input
           type="text"
           value={searchString}
           onChange={(e) => setSearchString(e.target.value)}
           placeholder="Search..."
+          className="input input-bordered w-full pr-10 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-300"
         />
-        {/* <button className="btn btn-square" disabled> */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
-        {/* </button> */}
+        {searchString && (
+          <button
+            onClick={clearSearch}
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+          >
+            <HiX className="w-5 h-5" />
+          </button>
+        )}
       </div>
     </div>
   );

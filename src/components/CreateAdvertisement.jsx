@@ -108,14 +108,12 @@ const CreateAdvertisement = () => {
 
   return (
     <>
-      {" "}
       <ToastContainer position="top-right" autoClose={3000} />
       <form
         onSubmit={handleSubmit}
         className="relative w-full max-w-6xl mx-auto bg-white space-y-4 border border-gray-200 shadow-2xl rounded-2xl p-6 transition-all hover:shadow-xl grid grid-cols-1 lg:grid-cols-2 gap-6"
       >
         <div className="w-full flex flex-col space-y-4">
-          {/* Media */}
           <div className="flex flex-col">
             <label className="label">Media:</label>
             <input
@@ -127,7 +125,6 @@ const CreateAdvertisement = () => {
             />
           </div>
 
-          {/* Category */}
           <div className="flex flex-col">
             <label className="label">Category:</label>
             <select
@@ -145,7 +142,6 @@ const CreateAdvertisement = () => {
             </select>
           </div>
 
-          {/* Offer & Request (Responsive Layout) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col">
               <label className="label">My Offer:</label>
@@ -169,7 +165,6 @@ const CreateAdvertisement = () => {
             </div>
           </div>
 
-          {/* Description */}
           <div className="flex flex-col">
             <label className="label">Description:</label>
             <textarea
@@ -182,9 +177,7 @@ const CreateAdvertisement = () => {
           </div>
         </div>
 
-        {/* Right Side - Time & Additional Fields */}
         <div className="w-full flex flex-col space-y-4">
-          {/* Time Availability */}
           <div className="flex flex-col">
             <label className="label">Time Availability:</label>
             <div className="flex flex-col sm:flex-row gap-2">
@@ -212,7 +205,6 @@ const CreateAdvertisement = () => {
             </button>
           </div>
 
-          {/* Time Availability Table */}
           <div className="overflow-x-auto">
             <table className="table w-full text-sm">
               <thead>
@@ -239,7 +231,6 @@ const CreateAdvertisement = () => {
             </table>
           </div>
 
-          {/* Group Teaching Checkbox */}
           <div className="flex items-center space-x-2">
             <label className="label">Group Teaching:</label>
             <input
@@ -251,7 +242,6 @@ const CreateAdvertisement = () => {
             />
           </div>
 
-          {/* Lesson Mode */}
           <div className="flex flex-col">
             <label className="label">Lesson Mode:</label>
             <select
@@ -268,7 +258,6 @@ const CreateAdvertisement = () => {
             </select>
           </div>
 
-          {/* Location */}
           <div className="flex flex-col">
             <label className="label">Location:</label>
             <input
@@ -280,9 +269,7 @@ const CreateAdvertisement = () => {
           </div>
         </div>
 
-        {/* Full Width Section - Language Selection */}
         <div className="w-full col-span-2 flex flex-col space-y-4">
-          {/* Language and Qualifications Selection */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col">
               <label className="label">Languages:</label>
@@ -314,7 +301,6 @@ const CreateAdvertisement = () => {
             </div>
           </div>
 
-          {/* Add Language Button */}
           <div className="flex mb-2 ml-auto">
             <button
               type="button"
@@ -325,7 +311,6 @@ const CreateAdvertisement = () => {
             </button>
           </div>
 
-          {/* Language Table */}
           <div className="overflow-x-auto">
             <table className="table w-full text-sm">
               <thead>
@@ -355,7 +340,6 @@ const CreateAdvertisement = () => {
             </table>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="btn btn-primary w-full sm:w-auto mt-4 hover:bg-indigo-500"
