@@ -19,7 +19,6 @@ const EditProfile = ({user, setUser}) => {
                     valueHolder[parts[0]] = el.value;
                 }
             }
-
             updated = await updateUser(updated);
             setUser(updated.data);
             toast.success("Profile update successfully!");
@@ -35,7 +34,7 @@ const EditProfile = ({user, setUser}) => {
             <form name="profile" onSubmit={submit}>
                 <div className="text-center">
                     <img
-                        src={user.profileImg?.[0] || "/default_avatar.webp"}
+                        src={user.profileImg || "/default_avatar.webp"}
                         alt="Profile"
                         className="w-24 h-24 rounded-full mx-auto mb-4"
                     />
@@ -46,8 +45,8 @@ const EditProfile = ({user, setUser}) => {
                     </label>
                     <input
                         type="text"
-                        name="profileImg[0]"
-                        defaultValue={user.profileImg?.[0]}
+                        name="profileImg"
+                        defaultValue={user.profileImg}
                         className="w-full p-2 border rounded"
                     />
                 </div>
