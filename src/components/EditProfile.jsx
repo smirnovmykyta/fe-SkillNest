@@ -101,7 +101,7 @@ const EditProfile = ({ user, setUser }) => {
           <input
             type="date"
             name="birthday"
-            defaultValue={new Date(user.birthday).toISOString().split("T")[0]}
+            defaultValue={user.birthday ? new Date(user.birthday).toISOString().split("T")[0] : new Date}
             className="w-full p-2 border rounded"
           />
         </div>
