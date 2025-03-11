@@ -14,6 +14,7 @@ const CardDetails = () => {
       try {
         const selectedCard = await getAdvertisementById(id);
         selectedCard._user = await getUserById(selectedCard.userId);
+        console.log(selectedCard)
         setCard(selectedCard);
       } catch (err) {
         console.error(err);

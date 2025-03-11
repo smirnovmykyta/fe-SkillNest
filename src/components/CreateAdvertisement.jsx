@@ -14,16 +14,19 @@ import { category } from "../constant/category.js";
 import { qualifications } from "../constant/qualifications.js";
 import { lessonMode } from "../constant/lessonMode.js";
 import { createAdvertisement } from "../api/advertisementApi.js";
+import {useUser} from "../context/UserContext.jsx";
+import {updateUser} from "../api/userApi.js";
 
 const CreateAdvertisement = () => {
   const navigate = useNavigate();
+  const {user, setUser} = useUser();
+
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [language, setLanguage] = useState({
     language: languages[0],
     qualification: qualifications[0],
   });
-
   const [formData, setFormData] = useState(defaultAdvertisement);
 
   const handleChange = (e) => {
@@ -97,9 +100,11 @@ const CreateAdvertisement = () => {
 
     try {
       const res = await createAdvertisement(formData);
+      const updatedUser = await updateUser({...user, userAdvertisements: [...user.userAdvertisements, res._id]});
 
       toast.success("Advertisement created successfully!");
 
+      setUser(updatedUser.data);
       navigate(`/card/${res._id}`);
     } catch (err) {
       toast.error("Ops, failed to create advertisement, try again!");
