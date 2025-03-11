@@ -32,7 +32,7 @@ const CardDetails = () => {
       <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
         <img
           src={card.media?.length ? card.media[0] : "#"}
-          className="w-50 h-50 rounded-full object-cover shadow-md lg:ml-10 lg:mt-10"
+          className="w-80 h-50 rounded-lg object-cover shadow-md lg:ml-10 lg:mt-5"
           alt="User profile"
         />
         <h2 className="text-lg font-semibold text-gray-800">
@@ -72,13 +72,13 @@ const CardDetails = () => {
 
         <div className="text-sm space-y-1">
           <p>
-            <span className="font-semibold">Languages:</span>
+            <span className="font-semibold">Languages: </span>
             {card.languages
               ?.map((lang) => `${lang.language} (${lang.qualification})`)
               .join(", ")}
           </p>
           <p>
-            <span className="font-semibold">Availability:</span>
+            <span className="font-semibold">Availability: </span>
             {card.timeAvailability
               ?.map(
                 (avail) =>
@@ -89,12 +89,12 @@ const CardDetails = () => {
               .join(", ")}
           </p>
           <p>
-            <span className="font-semibold">Group Learning:</span>
+            <span className="font-semibold">Group Learning: </span>
             {card.isGroup ? "Yes" : "No"}
           </p>
           <div className="flex gap-4">
             <p className="mt-2">
-              <span className="font-bold "> Online:</span>
+              <span className="font-bold "> Online: </span>
               {card.lessonMode === "online" || card.lessonMode === "both"
                 ? "yes"
                 : "no"}
@@ -109,10 +109,10 @@ const CardDetails = () => {
         </div>
 
         <p className="text-sm text-gray-600">
-          <span className="font-semibold">Location:</span> {card.location}
+          <span className="font-semibold">Location: </span> {card.location}
         </p>
         <p className="text-sm text-gray-600">
-          <span className="font-semibold">Expires on:</span>
+          <span className="font-semibold">Expires on: </span>
           {new Date(card.expirationDate).toLocaleDateString()}
         </p>
       </div>

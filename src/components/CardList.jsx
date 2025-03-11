@@ -2,8 +2,8 @@ import Card from "./Card";
 import { useEffect, useState } from "react";
 import {
   getAllAdvertisement,
-  getFavoriteAdvertisement,
   getAdvertisementBySearch,
+  getListOfAdvertisement,
 } from "../api/advertisementApi.js";
 import { useUser } from "../context/UserContext.jsx";
 import Searchbar from "./Searchbar";
@@ -19,7 +19,9 @@ const CardList = ({ type }) => {
       try {
         let res;
         if (type === "favorites") {
-          res = await getFavoriteAdvertisement(user.favoriteAdvertisements);
+          res = await getListOfAdvertisement(user.favoriteAdvertisements);
+        } else if(type === "myAdvertisements") {
+          res = await getListOfAdvertisement(user.userAdvertisements);
         } else if (searchString) {
           res = await getAdvertisementBySearch(searchString);
         } else {
@@ -33,13 +35,12 @@ const CardList = ({ type }) => {
     fetchData();
   }, [user, searchString]);
 
-  console.log(adList);
   return (
     <>
-      <Searchbar
+      {type !== "myAdvertisements" && <Searchbar
         searchString={searchString}
         setSearchString={setSearchString}
-      />
+      />}
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 p-4 ml-10 mr-10">
         {adList.length > 0 ? (
           adList.map((card) => <Card key={card._id} card={card} />)

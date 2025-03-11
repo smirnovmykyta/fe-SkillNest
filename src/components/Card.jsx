@@ -1,23 +1,8 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUserById } from "../api/userApi.js";
 import FavoriteToggle from "./FavoriteToggle";
 
 const Card = ({ card }) => {
-  const [user, setUser] = useState();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const users = await getUserById(card.userId);
-        setUser(users);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
-  }, [card]);
 
   const handleClick = (id) => {
     navigate(`/card/${id}`);
@@ -39,14 +24,11 @@ const Card = ({ card }) => {
               alt="User"
             />
           </a>
-
-          {user && (
             <div className="mt-2 text-center">
               <span className="text-sm text-gray-500">
-                {user.username || "unknown user"}
+                {card.username || "unknown user"}
               </span>
             </div>
-          )}
         </div>
 
         <div className="flex-1">

@@ -106,12 +106,27 @@ export async function getAdvertisementBySearch(searchString) {
   }
 }
 
-export async function getFavoriteAdvertisement(ids) {
+export async function getListOfAdvertisement(ids) {
   try {
     const requests = ids.map((id) =>
       axios
         .get(`${import.meta.env.VITE_SERVER_URL}/advertisement/${id}`)
         .then((res) => res.data)
+    );
+
+    return Promise.all(requests);
+  } catch (err) {
+    alert("Something went wrong, please try again later.");
+    console.error(err);
+  }
+}
+
+export async function getMyAdvertisement(ids) {
+  try {
+    const requests = ids.map((id) =>
+        axios
+            .get(`${import.meta.env.VITE_SERVER_URL}/advertisement/${id}`)
+            .then((res) => res.data)
     );
 
     return Promise.all(requests);

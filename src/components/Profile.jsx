@@ -3,6 +3,7 @@ import { getProfile } from "../api/userApi.js";
 import { useNavigate } from "react-router-dom";
 import ShowProfile from "./ShowProfile.jsx";
 import EditProfile from "./EditProfile.jsx";
+import CardList from "./CardList.jsx";
 
 const Profile = ({ activeTab = "profile" }) => {
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ const Profile = ({ activeTab = "profile" }) => {
       ) : activeTab == "edit" ? (
         <EditProfile user={user} setUser={setUser} />
       ) : activeTab == "advertisements" ? (
-        <div>My Advertisements (under construction)</div>
+       <CardList type="myAdvertisements"/>
       ) : (
         <div>No such tab: {activeTab}</div>
       )}
