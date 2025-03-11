@@ -9,7 +9,7 @@ const EditProfile = ({ user, setUser }) => {
         let valueHolder = updated;
         const parts = el.name.split(".");
         while (parts.length > 1) valueHolder = valueHolder[parts.shift()];
-        const match = parts[0].match(/^(\w+)\[(\d+)\]$/);
+        const match = parts[0].match(/^(\w+)\[(\d+)\$/);
         if (match) {
           const [_, name, index] = match;
           valueHolder[name][parseInt(index)] = el.value;
