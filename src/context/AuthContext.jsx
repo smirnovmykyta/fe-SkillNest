@@ -8,9 +8,8 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(
-      JSON.parse(localStorage.getItem("isAuth"))
+    JSON.parse(localStorage.getItem("isAuth"))
   );
-
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>

@@ -27,10 +27,8 @@ const CardDetails = () => {
 
   return (
     <article className="relative max-w-4xl mx-auto bg-white border border-gray-200 shadow-2xl rounded-2xl overflow-hidden transition-all hover:shadow-xl p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {/* Favorite Toggle */}
       <FavoriteToggle card={card} className="absolute top-4 right-4" />
 
-      {/* Left Section: User Info & Media */}
       <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
         <img
           src={card.media?.length ? card.media[0] : "#"}
@@ -41,7 +39,6 @@ const CardDetails = () => {
           {card._user?.username || "Unknown User"}
         </h2>
 
-        {/* Contact Info */}
         <div className="flex flex-wrap justify-center lg:justify-start gap-4 text-gray-600">
           {card._user?.phoneNumber && (
             <a
@@ -64,7 +61,6 @@ const CardDetails = () => {
         </div>
       </div>
 
-      {/* Right Section: Card Details */}
       <div className="flex flex-col space-y-3 text-gray-700">
         <p>
           <span className="font-semibold">Offering:</span> {card.offer}
@@ -74,16 +70,15 @@ const CardDetails = () => {
         </p>
         <p className="text-sm text-gray-600">{card.description}</p>
 
-        {/* Languages and qualifications */}
         <div className="text-sm space-y-1">
           <p>
-            <span className="font-semibold">Languages:</span>{" "}
+            <span className="font-semibold">Languages:</span>
             {card.languages
               ?.map((lang) => `${lang.language} (${lang.qualification})`)
               .join(", ")}
           </p>
           <p>
-            <span className="font-semibold">Availability:</span>{" "}
+            <span className="font-semibold">Availability:</span>
             {card.timeAvailability
               ?.map(
                 (avail) =>
@@ -94,7 +89,7 @@ const CardDetails = () => {
               .join(", ")}
           </p>
           <p>
-            <span className="font-semibold">Group Learning:</span>{" "}
+            <span className="font-semibold">Group Learning:</span>
             {card.isGroup ? "Yes" : "No"}
           </p>
           <div className="flex gap-4">
@@ -117,7 +112,7 @@ const CardDetails = () => {
           <span className="font-semibold">Location:</span> {card.location}
         </p>
         <p className="text-sm text-gray-600">
-          <span className="font-semibold">Expires on:</span>{" "}
+          <span className="font-semibold">Expires on:</span>
           {new Date(card.expirationDate).toLocaleDateString()}
         </p>
       </div>
