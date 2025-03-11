@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUserById } from "../api/userApi.js";
 import FavoriteToggle from "./FavoriteToggle";
 
 const Card = ({ card }) => {
