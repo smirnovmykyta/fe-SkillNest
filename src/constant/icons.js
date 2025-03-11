@@ -1,4 +1,3 @@
-import { LuMessageCircleMore } from "react-icons/lu";
 import { BiSearchAlt } from "react-icons/bi";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { GrFavorite } from "react-icons/gr";
