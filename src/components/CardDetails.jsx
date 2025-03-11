@@ -14,7 +14,6 @@ const CardDetails = () => {
       try {
         const selectedCard = await getAdvertisementById(id);
         selectedCard._user = await getUserById(selectedCard.userId);
-        console.log(selectedCard)
         setCard(selectedCard);
       } catch (err) {
         console.error(err);
@@ -33,7 +32,7 @@ const CardDetails = () => {
       <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
         <img
           src={card.media?.length ? card.media[0] : "#"}
-          className="w-50 h-50 rounded-full object-cover shadow-md lg:ml-10 lg:mt-10"
+          className="w-80 h-50 rounded-lg object-cover shadow-md lg:ml-10 lg:mt-5"
           alt="User profile"
         />
         <h2 className="text-lg font-semibold text-gray-800">

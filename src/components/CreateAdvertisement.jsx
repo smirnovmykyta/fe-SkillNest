@@ -98,6 +98,10 @@ const CreateAdvertisement = () => {
       return;
     }
 
+    if(formData.media.length === 0){
+      formData.media.push("https://res.cloudinary.com/dm3bzm6cx/image/upload/v1741702488/default_advertisement_img.avif")
+    }
+
     try {
       const res = await createAdvertisement(formData);
       const updatedUser = await updateUser({...user, userAdvertisements: [...user.userAdvertisements, res._id]});
