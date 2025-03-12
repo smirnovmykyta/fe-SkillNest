@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import FavoriteToggle from "./FavoriteToggle";
+import {useUser} from "../context/UserContext.jsx";
 
 const Card = ({ card }) => {
   const navigate = useNavigate();
+  const {user} = useUser();
 
   const handleClick = (id) => {
     navigate(`/card/${id}`);
@@ -10,7 +12,7 @@ const Card = ({ card }) => {
 
   return (
     <article className="relative rounded-xl border-2 border-gray-100 bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-4">
-      <FavoriteToggle card={card} />
+      {(!user || !user.userAdvertisements.includes(card._id)) && <FavoriteToggle card={card} />}
 
       <div
         onClick={() => handleClick(card._id)}

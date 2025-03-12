@@ -4,10 +4,12 @@ import { getAdvertisementById } from "../api/advertisementApi.js";
 import { getUserById } from "../api/userApi.js";
 import FavoriteToggle from "./FavoriteToggle.jsx";
 import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
+import {useUser} from "../context/UserContext.jsx";
 
 const CardDetails = () => {
   const { id } = useParams();
   const [card, setCard] = useState(null);
+  const {user} = useUser();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +29,7 @@ const CardDetails = () => {
 
   return (
     <article className="relative max-w-4xl mx-auto bg-white border border-gray-200 shadow-2xl rounded-2xl overflow-hidden transition-all hover:shadow-xl p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <FavoriteToggle card={card} className="absolute top-4 right-4" />
+      {(!user || !user.userAdvertisements.includes(id)) && <FavoriteToggle card={card} className="absolute top-4 right-4" />}
 
       <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
         <img
