@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import _ from "lodash";
 
 import { toast } from "react-toastify";
@@ -13,14 +13,17 @@ import { languages } from "../constant/languages.js";
 import { category } from "../constant/category.js";
 import { qualifications } from "../constant/qualifications.js";
 import { lessonMode } from "../constant/lessonMode.js";
-import {createAdvertisement, updateAdvertisement} from "../api/advertisementApi.js";
-import {useUser} from "../context/UserContext.jsx";
-import {updateUser} from "../api/userApi.js";
+import {
+  createAdvertisement,
+  updateAdvertisement,
+} from "../api/advertisementApi.js";
+import { useUser } from "../context/UserContext.jsx";
+import { updateUser } from "../api/userApi.js";
 
-const CreateAdvertisement = ({type}) => {
+const CreateAdvertisement = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {user, setUser} = useUser();
+  const { user, setUser } = useUser();
 
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -28,7 +31,9 @@ const CreateAdvertisement = ({type}) => {
     language: languages[0],
     qualification: qualifications[0],
   });
-  const [formData, setFormData] = useState(type === "edit" ? location.state?.card : defaultAdvertisement);
+  const [formData, setFormData] = useState(
+    type === "edit" ? location.state?.card : defaultAdvertisement
+  );
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -99,11 +104,13 @@ const CreateAdvertisement = ({type}) => {
       return;
     }
 
-    if(formData.media.length === 0){
-      formData.media.push("https://res.cloudinary.com/dm3bzm6cx/image/upload/v1741702488/default_advertisement_img.avif")
+    if (formData.media.length === 0) {
+      formData.media.push(
+        "https://res.cloudinary.com/dm3bzm6cx/image/upload/v1741702488/default_advertisement_img.avif"
+      );
     }
 
-    if(type === "edit") {
+    if (type === "edit") {
       try {
         const res = await updateAdvertisement(formData._id, formData);
 
@@ -116,7 +123,10 @@ const CreateAdvertisement = ({type}) => {
     } else {
       try {
         const res = await createAdvertisement(formData);
-        const updatedUser = await updateUser({...user, userAdvertisements: [...user.userAdvertisements, res._id]});
+        const updatedUser = await updateUser({
+          ...user,
+          userAdvertisements: [...user.userAdvertisements, res._id],
+        });
 
         toast.success("Advertisement created successfully!");
 
