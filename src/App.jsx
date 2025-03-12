@@ -21,7 +21,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
 
           <Route element={<ProtectedRoute />}>
-            <Route path="/ad" element={<CreateAdvertisement />} />
+            <Route path="/ad" element={<CreateAdvertisement type="new"/>} />
+            <Route path="/ad/edit/:id" element={<CreateAdvertisement type="edit"/>} />
             <Route path="/favorites" element={<CardList type="favorites" />} />
             <Route path="/message" element={<Messages />} />
             <Route path="/profile" element={<Profile />} />

@@ -13,6 +13,10 @@ const Card = ({card, type}) => {
         navigate(`/card/${id}`);
     };
 
+    const handleEdit = (card) => {
+        navigate(`/ad/edit/${card._id}`, {state: {card}});
+    }
+
     const handleDelete = async (id) => {
         try {
             if (user) {
@@ -38,7 +42,7 @@ const Card = ({card, type}) => {
             {type === "myAdvertisements" && <div className="absolute top-2 right-2 flex gap-2">
                 <button
                     className="text-gray-500 hover:text-blue-600 transition-colors"
-                    // onClick={() => handleEdit(card)}
+                    onClick={() => handleEdit(card)}
                     title="Edit"
                 >
                     <Edit size={20}/>
