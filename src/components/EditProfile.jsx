@@ -119,7 +119,7 @@ const EditProfile = ({user, setUser}) => {
                         <input
                             type="text"
                             name="address.street"
-                            defaultValue={user.address.street ? user.address.street : ""}
+                            defaultValue={user.address?.street ? user.address?.street : ""}
                             className="w-full p-2 border rounded"
                         />
                     </div>
@@ -131,7 +131,7 @@ const EditProfile = ({user, setUser}) => {
                         <input
                             type="text"
                             name="address.houseNumber"
-                            defaultValue={user.address?.houseNumber ? user.address.houseNumber : ""}
+                            defaultValue={user.address?.houseNumber ? user.address?.houseNumber : ""}
                             className="w-full p-2 border rounded"
                         />
                     </div>
@@ -143,7 +143,7 @@ const EditProfile = ({user, setUser}) => {
                         <input
                             type="text"
                             name="address.postalCode"
-                            defaultValue={user.address?.postalCode ? user.address.postalCode : ""}
+                            defaultValue={user.address?.postalCode ? user.address?.postalCode : ""}
                             className="w-full p-2 border rounded"
                         />
                     </div>
