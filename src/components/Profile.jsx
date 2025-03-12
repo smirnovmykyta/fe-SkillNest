@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {deleteUser, getProfile} from "../api/userApi.js";
+import React, {useState} from "react";
+import {deleteUser} from "../api/userApi.js";
 import {useNavigate} from "react-router-dom";
 import ShowProfile from "./ShowProfile.jsx";
 import EditProfile from "./EditProfile.jsx";
