@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import _ from "lodash";
 
 import { toast } from "react-toastify";
@@ -13,12 +13,13 @@ import { languages } from "../constant/languages.js";
 import { category } from "../constant/category.js";
 import { qualifications } from "../constant/qualifications.js";
 import { lessonMode } from "../constant/lessonMode.js";
-import { createAdvertisement } from "../api/advertisementApi.js";
+import {createAdvertisement, updateAdvertisement} from "../api/advertisementApi.js";
 import {useUser} from "../context/UserContext.jsx";
 import {updateUser} from "../api/userApi.js";
 
-const CreateAdvertisement = () => {
+const CreateAdvertisement = ({type}) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const {user, setUser} = useUser();
 
   const [date, setDate] = useState("");
@@ -27,7 +28,7 @@ const CreateAdvertisement = () => {
     language: languages[0],
     qualification: qualifications[0],
   });
-  const [formData, setFormData] = useState(defaultAdvertisement);
+  const [formData, setFormData] = useState(type === "edit" ? location.state?.card : defaultAdvertisement);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -102,16 +103,28 @@ const CreateAdvertisement = () => {
       formData.media.push("https://res.cloudinary.com/dm3bzm6cx/image/upload/v1741702488/default_advertisement_img.avif")
     }
 
-    try {
-      const res = await createAdvertisement(formData);
-      const updatedUser = await updateUser({...user, userAdvertisements: [...user.userAdvertisements, res._id]});
+    if(type === "edit") {
+      try {
+        const res = await updateAdvertisement(formData._id, formData);
 
-      toast.success("Advertisement created successfully!");
+        toast.success("Advertisement updated successfully!");
 
-      setUser(updatedUser.data);
-      navigate(`/card/${res._id}`);
-    } catch (err) {
-      toast.error("Ops, failed to create advertisement, try again!");
+        navigate(`/card/${res.data._id}`);
+      } catch (err) {
+        toast.error("Ops, failed to update advertisement, try again!");
+      }
+    } else {
+      try {
+        const res = await createAdvertisement(formData);
+        const updatedUser = await updateUser({...user, userAdvertisements: [...user.userAdvertisements, res._id]});
+
+        toast.success("Advertisement created successfully!");
+
+        setUser(updatedUser.data);
+        navigate(`/card/${res._id}`);
+      } catch (err) {
+        toast.error("Ops, failed to create advertisement, try again!");
+      }
     }
   };
 
@@ -158,6 +171,7 @@ const CreateAdvertisement = () => {
                 required
                 type="text"
                 name="offer"
+                value={formData.offer}
                 onChange={handleChange}
                 className="input input-bordered w-full"
               />
@@ -168,6 +182,7 @@ const CreateAdvertisement = () => {
                 required
                 type="text"
                 name="request"
+                value={formData.request}
                 onChange={handleChange}
                 className="input input-bordered w-full"
               />
@@ -272,6 +287,7 @@ const CreateAdvertisement = () => {
             <input
               type="text"
               name="location"
+              value={formData.location}
               onChange={handleChange}
               className="input input-bordered w-full"
             />
