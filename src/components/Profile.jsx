@@ -5,25 +5,15 @@ import ShowProfile from "./ShowProfile.jsx";
 import EditProfile from "./EditProfile.jsx";
 import CardList from "./CardList.jsx";
 import {Trash2} from "lucide-react";
+import {useUser} from "../context/UserContext.jsx";
 
 
 const Profile = ({activeTab = "profile"}) => {
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
+    const {user, setUser} = useUser();
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const userData = await getProfile();
-                setUser(userData);
-            } catch (error) {
-                console.error("Error fetching user profile:", error);
-            }
-        };
-
-        fetchUser();
-    }, []);
 
     const openModal = (e) => {
         e.preventDefault();
@@ -38,13 +28,17 @@ const Profile = ({activeTab = "profile"}) => {
         try{
             const res = await deleteUser();
             if(!res.data) return
+
             localStorage.removeItem("token");
             localStorage.removeItem("isAuth");
-            setUser("");
+
+            setUser( null);
+
             navigate("/");
-            closeModal();
         } catch (error){
             console.error(error)
+        } finally {
+            closeModal();
         }
     };
 
